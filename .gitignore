@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Masks and generated outputs
+data/
+converted/
+*.npy
+
+# Notebook checkpoints
+.ipynb_checkpoints/
