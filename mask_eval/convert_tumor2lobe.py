@@ -7,8 +7,7 @@ import numpy as np
 import scipy.ndimage as ndi
 from tqdm import tqdm
 
-MASKS_DIR = r"./data"
-OUTPUT_DIR = r"./converted"
+
 LUNG_LOBE_LABELS = [28, 29, 30, 31, 32]
 TUMOR_LABEL = 23
 
@@ -41,8 +40,8 @@ def convert_mask(mask_path, output_dir):
 
 def main():
     parser = argparse.ArgumentParser(description="Assign tumors with lung contact to their dominant lobe.")
-    parser.add_argument("--masks-dir", type=Path, default=Path(MASKS_DIR))
-    parser.add_argument("--output-dir", type=Path, default=Path(OUTPUT_DIR))
+    parser.add_argument("--masks-dir", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     if not args.masks_dir.is_dir():
         parser.error(f"Masks directory does not exist: {args.masks_dir}")
