@@ -39,8 +39,10 @@ def main():
             raise ValueError(f"{mask_path.name}: shape {mask.shape} differs from {heatmap.shape}")
         heatmap += np.isin(mask, LUNG_LOBE_LABELS)
 
+    output_dir = Path("./") #output_dir = args.masks_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
     heatmap /= len(mask_paths)
-    output_path = args.masks_dir / "lung_heatmap.npy"
+    output_path = output_dir / "lung_heatmap.npy"
     np.save(output_path, heatmap)
     print(f"Heatmap saved to: {output_path.resolve()}")
 
@@ -50,7 +52,7 @@ def main():
     ax.set_title(f"Lung heatmap — axial slice {slice_index}")
     ax.axis("off")
     fig.colorbar(plot, ax=ax, label="Lung frequency")
-    png_path = args.masks_dir / "lung_heatmap.png"
+    png_path = output_dir / "lung_heatmap.png"
     fig.savefig(png_path, dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"PNG saved to: {png_path.resolve()}")

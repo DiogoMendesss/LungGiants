@@ -14,3 +14,4 @@ OUTPUT_DIR="/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/MAISI/resul
 python -u mask_eval/convert_tumor2lobe.py \
         --masks-dir $MASKS_DIR \
         --output-dir $OUTPUT_DIR \
+        --overwrite
