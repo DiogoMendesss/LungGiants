@@ -17,10 +17,15 @@ def main():
     if not args.masks_dir.is_dir():
         parser.error(f"Masks directory does not exist: {args.masks_dir}")
 
-    mask_paths = sorted(path for path in args.masks_dir.iterdir()
-                        if path.is_file() and path.name.lower().endswith((".nii", ".nii.gz")))
+    mask_paths = sorted(
+        path for path in MASKS_DIR.rglob("*")
+        if path.is_file() and path.name.lower().endswith((".nii", ".nii.gz"))
+    )
+
     if not mask_paths:
         parser.error(f"No NIfTI masks found in: {args.masks_dir}")
+    else:
+        print(f"Found {len(mask_paths)} mask files in {MASKS_DIR}")
 
     heatmap = None
     lps_orientation = nib.orientations.axcodes2ornt(("L", "P", "S"))
