@@ -13,19 +13,33 @@ LUNG_LOBE_LABELS = [28, 29, 30, 31, 32]
 def main():
     parser = argparse.ArgumentParser(description="Compute the mean binary lung map across masks.")
     parser.add_argument("--masks-dir", type=Path, default=Path(MASKS_DIR))
+    parser.add_argument("--dataset_name", type=str, default="lung_masks", help="Name of the dataset (used for output file naming).")
     args = parser.parse_args()
     if not args.masks_dir.is_dir():
         parser.error(f"Masks directory does not exist: {args.masks_dir}")
 
+    masks_dir = Path(args.masks_dir)
+    if args.dataset_name == "train":
+        search_dirs = [
+            dataset_dir / "ts_out"
+            for dataset_dir in masks_dir.iterdir()
+            if dataset_dir.is_dir() and (dataset_dir / "ts_out").is_dir()
+        ]
+    else:
+        search_dirs = [masks_dir]
+
     mask_paths = sorted(
-        path for path in MASKS_DIR.rglob("*")
+        path
+        for folder in search_dirs
+        for path in folder.iterdir()
         if path.is_file() and path.name.lower().endswith((".nii", ".nii.gz"))
     )
+
 
     if not mask_paths:
         parser.error(f"No NIfTI masks found in: {args.masks_dir}")
     else:
-        print(f"Found {len(mask_paths)} mask files in {MASKS_DIR}")
+        print(f"Found {len(mask_paths)} mask files in {args.masks_dir}")
 
     heatmap = None
     lps_orientation = nib.orientations.axcodes2ornt(("L", "P", "S"))
@@ -44,10 +58,10 @@ def main():
             raise ValueError(f"{mask_path.name}: shape {mask.shape} differs from {heatmap.shape}")
         heatmap += np.isin(mask, LUNG_LOBE_LABELS)
 
-    output_dir = Path("./") #output_dir = args.masks_dir
+    output_dir = Path(f"./{args.dataset_name}") #output_dir = args.masks_dir
     output_dir.mkdir(parents=True, exist_ok=True)
     heatmap /= len(mask_paths)
-    output_path = output_dir / "lung_heatmap.npy"
+    output_path = output_dir / f"{args.dataset_name}_heatmap.npy"
     np.save(output_path, heatmap)
     print(f"Heatmap saved to: {output_path.resolve()}")
 
@@ -57,7 +71,7 @@ def main():
     ax.set_title(f"Lung heatmap — axial slice {slice_index}")
     ax.axis("off")
     fig.colorbar(plot, ax=ax, label="Lung frequency")
-    png_path = output_dir / "lung_heatmap.png"
+    png_path = output_dir / f"{args.dataset_name}_heatmap.png"
     fig.savefig(png_path, dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"PNG saved to: {png_path.resolve()}")

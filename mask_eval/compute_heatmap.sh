@@ -8,7 +8,8 @@
 
 set -euo pipefail
 
-MASKS_DIR="/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/MAISI/results_synth_maskct/masks_132_without_tumor"
+MASKS_DIR="/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train"
 
 python -u mask_eval/compute_heatmap.py \
         --masks-dir $MASKS_DIR \
+        --dataset_name "train" \

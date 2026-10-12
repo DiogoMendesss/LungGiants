@@ -1,0 +1,3 @@
+Found 1036 mask files in /nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train
+Heatmap saved to: /nas-ctm01/homes/djmendes/LungGiants/train/train_heatmap.npy
+PNG saved to: /nas-ctm01/homes/djmendes/LungGiants/train/train_heatmap.png
