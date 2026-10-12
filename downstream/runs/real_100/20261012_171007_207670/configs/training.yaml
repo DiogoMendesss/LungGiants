@@ -1,0 +1,42 @@
+seed: 42
+
+data:
+  batch_size: 1
+  eval_batch_size: 1
+  num_workers: 4
+  pin_memory: true
+  expected_shape: [256, 256, 128]
+  hu_min: -1000
+  hu_max: 1000
+
+model:
+  spatial_dims: 3
+  in_channels: 1
+  out_channels: 1
+  init_filters: 16
+  blocks_down: [1, 2, 2, 4]
+  blocks_up: [1, 1, 1]
+  dropout_prob: 0.0
+
+loss:
+  dice_weight: 1.0
+  bce_weight: 1.0
+
+optimizer:
+  lr: 0.0001
+  weight_decay: 0.00001
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  precision: 16-mixed
+  max_epochs: 100
+  log_every_n_steps: 10
+
+checkpoint:
+  monitor: val_dice
+  mode: max
+  save_top_k: 1
+  save_last: true
+
+output_dir: runs
