@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py", line 8, in <module>
-    import lightning.pytorch as pl
-ModuleNotFoundError: No module named 'lightning'

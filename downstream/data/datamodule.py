@@ -20,6 +20,7 @@ class NoduleDataModule(pl.LightningDataModule):
         expected_shape=(256, 256, 128),
         hu_min=-1000,
         hu_max=1000,
+        classes="nodule",
     ):
         super().__init__()
         self.save_hyperparameters()
@@ -42,6 +43,7 @@ class NoduleDataModule(pl.LightningDataModule):
                 datasets_config=self.hparams.datasets_config,
                 experiment_config=self.hparams.experiment_config,
                 split_path=self.hparams.split_path,
+                classes=self.hparams.classes,
             )
 
         train_cases, val_cases, test_cases = self._case_lists
@@ -73,6 +75,7 @@ class NoduleDataModule(pl.LightningDataModule):
             expected_shape=self.hparams.expected_shape,
             hu_min=self.hparams.hu_min,
             hu_max=self.hparams.hu_max,
+            classes=self.hparams.classes,
         )
 
     def _make_loader(self, dataset, batch_size, shuffle):

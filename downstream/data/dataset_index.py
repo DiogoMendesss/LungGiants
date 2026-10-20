@@ -1,4 +1,4 @@
-"""Index real CT/mask pairs and create or reuse a fixed patient split."""
+"""Index real CT/nodule/TS mask triples and create or reuse a fixed patient split."""
 
 import argparse
 import json
@@ -6,6 +6,8 @@ import random
 from pathlib import Path
 
 import yaml
+
+from tasks import CLASS_CHOICES, mask_keys
 
 
 def nifti_id(path):
@@ -44,33 +46,37 @@ def index_folder(folder):
     return files
 
 
-def collect_cases(root, datasets):
-    """Match images and masks within each configured real dataset."""
+def collect_cases(root, datasets, classes="nodule"):
+    """Match CTs, nodule masks, and TS masks within each dataset."""
+    required_masks = mask_keys(classes)
     cases = []
 
     for dataset, folders in sorted(datasets.items()):
         images = index_folder(root / folders["images"])
-        masks = index_folder(root / folders["masks"])
+        mask_indices = {
+            key: index_folder(root / folders[f"{key}s"])
+            for key in required_masks
+        }
 
-        missing_masks = sorted(images.keys() - masks.keys())
-        missing_images = sorted(masks.keys() - images.keys())
+        for mask_name, masks in mask_indices.items():
+            missing_masks = sorted(images.keys() - masks.keys())
+            missing_images = sorted(masks.keys() - images.keys())
 
-        if missing_masks or missing_images:
-            raise ValueError(
-                f"Unmatched files in {dataset}.\n"
-                f"Images without masks: {missing_masks[:10]}\n"
-                f"Masks without images: {missing_images[:10]}"
-            )
+            if missing_masks or missing_images:
+                raise ValueError(
+                    f"Unmatched files in {dataset} ({mask_name}).\n"
+                    f"Images without masks: {missing_masks[:10]}\n"
+                    f"Masks without images: {missing_images[:10]}"
+                )
 
         for case_id in sorted(images):
             cases.append(
                 {
                     "case_id": case_id,
-                    # Dataset prefix avoids collisions between datasets.
-                    "patient_id": f"{dataset}/{case_id}",
+                    "patient_id": case_id,
                     "dataset": dataset,
                     "image": images[case_id],
-                    "label": masks[case_id],
+                    **{key: masks[case_id] for key, masks in mask_indices.items()},
                 }
             )
 
@@ -157,7 +163,7 @@ def validate_saved_split(saved, train_cases, test_cases, settings):
         )
 
 
-def build_real_index(config_path, split_path):
+def build_real_index(config_path, split_path, classes="nodule"):
     """Return train/val/test records, creating the split only if absent."""
     config_path = Path(config_path)
     split_path = Path(split_path)
@@ -168,8 +174,8 @@ def build_real_index(config_path, split_path):
     root = Path(config["root"])
     settings = config["split"]
 
-    train_cases = collect_cases(root, config["real"]["train"])
-    test_cases = collect_cases(root, config["real"]["test"])
+    train_cases = collect_cases(root, config["real"]["train"], classes=classes)
+    test_cases = collect_cases(root, config["real"]["test"], classes=classes)
 
     train_ids = {case["patient_id"] for case in train_cases}
     test_ids = {case["patient_id"] for case in test_cases}
@@ -211,9 +217,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/datasets.yaml")
     parser.add_argument("--split", default="configs/splits/real_split.json")
+    parser.add_argument("--classes", choices=CLASS_CHOICES, default="nodule")
     args = parser.parse_args()
 
-    index = build_real_index(args.config, args.split)
+    index = build_real_index(args.config, args.split, classes=args.classes)
 
     for split, cases in index.items():
         print(f"\n{split}: {len(cases)} cases")

@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py", line 16, in <module>
-    from data.datamodule import NoduleDataModule
-ModuleNotFoundError: No module named 'data'

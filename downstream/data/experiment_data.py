@@ -6,6 +6,7 @@ import random
 import yaml
 
 from data.dataset_index import build_real_index
+from tasks import CLASS_CHOICES
 
 
 def select_real_cases(cases, percent, seed):
@@ -58,6 +59,7 @@ def build_experiment_data(
     datasets_config,
     experiment_config,
     split_path="configs/splits/real_split.json",
+    classes="nodule",
 ):
     """Return train, validation, and test case lists."""
     with open(experiment_config) as file:
@@ -78,7 +80,7 @@ def build_experiment_data(
             "Set synthetic_dataset to null for a real-only experiment."
         )
 
-    index = build_real_index(datasets_config, split_path)
+    index = build_real_index(datasets_config, split_path, classes=classes)
 
     # Reuse the configured seed for reproducible subset selection.
     train_cases = select_real_cases(
@@ -104,12 +106,14 @@ if __name__ == "__main__":
         "--split",
         default="configs/splits/real_split.json",
     )
+    parser.add_argument("--classes", choices=CLASS_CHOICES, default="nodule")
     args = parser.parse_args()
 
     train, val, test = build_experiment_data(
         datasets_config=args.datasets,
         experiment_config=args.experiment,
         split_path=args.split,
+        classes=args.classes,
     )
 
     for name, cases in (("train", train), ("val", val), ("test", test)):

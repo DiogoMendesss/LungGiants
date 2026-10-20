@@ -1,0 +1,76 @@
+{
+  "os": "Linux-6.8.0-146-generic-x86_64-with-glibc2.39",
+  "python": "CPython 3.11.15",
+  "startedAt": "2026-10-13T22:19:58.678470Z",
+  "args": [
+    "--experiment",
+    "configs/experiments/real_100.yaml"
+  ],
+  "program": "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py",
+  "codePath": "downstream/train.py",
+  "codePathLocal": "train.py",
+  "git": {
+    "remote": "https://github.com/DiogoMendesss/LungGiants.git",
+    "commit": "620b0ec9cc0b9a9fd9ba0d58a8a9c83024349823"
+  },
+  "email": "diogo.j.mendes@inesctec.pt",
+  "root": "runs/real_100/20261013_231956_274173",
+  "host": "01.ctm-deep-01",
+  "executable": "/nas-ctm01/homes/djmendes/.conda/envs/gen/bin/python",
+  "cpu_count": 12,
+  "cpu_count_logical": 24,
+  "gpu": "Quadro RTX 6000",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "105089261568",
+      "used": "38004285440"
+    }
+  },
+  "memory": {
+    "total": "134936907776"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Quadro RTX 6000",
+      "memoryTotal": "25769803776",
+      "cudaCores": 4608,
+      "architecture": "Turing",
+      "uuid": "GPU-bcafb525-b77c-552a-f2ce-b144f514d9b9"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "slurm": {
+    "cluster_name": "(null)",
+    "conf": "/etc/slurm/slurm.conf",
+    "cpus_on_node": "24",
+    "gtids": "0",
+    "job_account": "scholar",
+    "job_cpus_per_node": "24",
+    "job_end_time": "1792102786",
+    "job_gid": "1000000",
+    "job_id": "53620",
+    "job_name": "train_real100",
+    "job_nodelist": "01.ctm-deep-01",
+    "job_num_nodes": "1",
+    "job_partition": "gpu_min24gb",
+    "job_qos": "gpu_min24gb",
+    "job_start_time": "1791929986",
+    "job_uid": "1000284",
+    "job_user": "djmendes",
+    "jobid": "53620",
+    "localid": "0",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "01.ctm-deep-01",
+    "prio_process": "0",
+    "procid": "0",
+    "submit_dir": "/nas-ctm01/homes/djmendes/LungGiants/downstream",
+    "submit_host": "ctm-login-02.inesctec.pt",
+    "task_pid": "4107968",
+    "tasks_per_node": "24",
+    "topology_addr": "01.ctm-deep-01",
+    "topology_addr_pattern": "node"
+  },
+  "writerId": "bvxqmg26dx918evl4jqcaw4r7nl9ucux"
+}

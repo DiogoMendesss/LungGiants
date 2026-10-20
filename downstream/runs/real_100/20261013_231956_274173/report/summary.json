@@ -1,0 +1,58 @@
+{
+  "experiment": "real_100",
+  "checkpoint": "/nas-ctm01/homes/djmendes/LungGiants/downstream/runs/real_100/20261013_231956_274173/checkpoints/epoch=045-dice=0.4903.ckpt",
+  "checkpoint_monitor": "val_dice",
+  "checkpoint_mode": "max",
+  "eligible_cases": 98,
+  "excluded_empty_cases": 6,
+  "mean_metrics": {
+    "dice": 0.49992347514433016,
+    "precision": 0.54451225491883,
+    "recall": 0.5283743911324658
+  },
+  "prediction_threshold": "sigmoid(logit) > 0.5",
+  "averaging": "arithmetic mean of per-case foreground voxel metrics",
+  "precision_when_no_predicted_foreground": 0.0,
+  "examples": [
+    {
+      "rank": "Best 1",
+      "patient_id": "LIDC_IDRI/LIDC-IDRI-0054",
+      "case_id": "LIDC-IDRI-0054",
+      "dataset": "LIDC_IDRI",
+      "dice": 0.9322033898305084,
+      "precision": 0.9295774647887324,
+      "recall": 0.9348441926345609,
+      "axial_slice_index_ras": 81
+    },
+    {
+      "rank": "Best 2",
+      "patient_id": "LIDC_IDRI/LIDC-IDRI-0732",
+      "case_id": "LIDC-IDRI-0732",
+      "dataset": "LIDC_IDRI",
+      "dice": 0.8785425101214575,
+      "precision": 0.9004149377593361,
+      "recall": 0.857707509881423,
+      "axial_slice_index_ras": 99
+    },
+    {
+      "rank": "Worst 1",
+      "patient_id": "LNDb/LNDb-0267",
+      "case_id": "LNDb-0267",
+      "dataset": "LNDb",
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "axial_slice_index_ras": 79
+    },
+    {
+      "rank": "Worst 2",
+      "patient_id": "LNDb/LNDb-0127",
+      "case_id": "LNDb-0127",
+      "dataset": "LNDb",
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "axial_slice_index_ras": 96
+    }
+  ]
+}

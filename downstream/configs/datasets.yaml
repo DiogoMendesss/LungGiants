@@ -1,4 +1,4 @@
-root: Z:/nas-ctm01/datasets/public/LungNodule-nifti
+root: /nas-ctm01/datasets/public/LungNodule-nifti
 
 
 split:
@@ -10,20 +10,25 @@ real:
   train:
     LIDC_IDRI:
       images: preprocessed/train/LIDC_IDRI/ct
-      masks: preprocessed/train/LIDC_IDRI/nodulemask
+      nod_masks: preprocessed/train/LIDC_IDRI/nodulemask
+      ts_masks: preprocessed/train/LIDC_IDRI/ts_out
 
     LNDb:
       images: preprocessed/train/LNDb/ct
-      masks: preprocessed/train/LNDb/nodulemask
+      nod_masks: preprocessed/train/LNDb/nodulemask
+      ts_masks: preprocessed/train/LNDb/ts_out
+      
 
   test:
     LIDC_IDRI:
       images: preprocessed/test/LIDC_IDRI/ct
-      masks: preprocessed/test/LIDC_IDRI/nodulemask
+      nod_masks: preprocessed/test/LIDC_IDRI/nodulemask
+      ts_masks: preprocessed/test/LIDC_IDRI/ts_out
 
     LNDb:
       images: preprocessed/test/LNDb/ct
-      masks: preprocessed/test/LNDb/nodulemask
+      nod_masks: preprocessed/test/LNDb/nodulemask
+      ts_masks: preprocessed/test/LNDb/ts_out
 
 synthetic:
   maisi_real_masks:

@@ -1,4 +1,4 @@
-root: Z:/nas-ctm01/datasets/public/LungNodule-nifti
+root: /nas-ctm01/datasets/public/LungNodule-nifti
 
 
 split:

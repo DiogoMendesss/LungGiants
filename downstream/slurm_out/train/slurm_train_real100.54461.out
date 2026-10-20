@@ -1,0 +1,54 @@
+Experiment: real_100
+Classes: lung+nodule
+Training cases: 932
+Validation cases: 104
+┏━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name             ┃ Type              ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ network          │ SegResNet         │ 24.7 K │ train │     0 │
+│ 1 │ dice_loss        │ DiceLoss          │      0 │ train │     0 │
+│ 2 │ entropy_loss     │ CrossEntropyLoss  │      0 │ train │     0 │
+│ 3 │ nodule_dice_loss │ DiceLoss          │      0 │ train │     0 │
+│ 4 │ nodule_bce_loss  │ BCEWithLogitsLoss │      0 │ train │     0 │
+└───┴──────────────────┴───────────────────┴────────┴───────┴───────┘
+Trainable params: 24.7 K                                                        
+Non-trainable params: 0                                                         
+Total params: 24.7 K                                                            
+Total estimated model params size (MB): 0.099                                   
+Modules in train mode: 51                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+Training: |          | 0/? [00:00<?, ?it/s]Training: |          | 0/? [00:00<?, ?it/s]Epoch 0:   0%|          | 0/4 [00:00<?, ?it/s]Epoch 0: 100%|██████████| 4/4 [00:23<00:00,  0.17it/s]Epoch 0: 100%|██████████| 4/4 [00:23<00:00,  0.17it/s, v_num=n0e2]
+Validation: |          | 0/? [00:00<?, ?it/s][A
+Validation: |          | 0/? [00:00<?, ?it/s][A
+Validation DataLoader 0:   0%|          | 0/4 [00:00<?, ?it/s][A
+Validation DataLoader 0: 100%|██████████| 4/4 [00:08<00:00,  0.48it/s][A
+                                                                      [AEpoch 0: 100%|██████████| 4/4 [00:33<00:00,  0.12it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]Epoch 0: 100%|██████████| 4/4 [00:33<00:00,  0.12it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]Epoch 0:   0%|          | 0/4 [00:00<?, ?it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]        Epoch 1:   0%|          | 0/4 [00:00<?, ?it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]Epoch 1: 100%|██████████| 4/4 [00:08<00:00,  0.50it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]Epoch 1: 100%|██████████| 4/4 [00:08<00:00,  0.50it/s, v_num=n0e2, val_loss=1.770, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000132]
+Validation: |          | 0/? [00:00<?, ?it/s][A
+Validation: |          | 0/? [00:00<?, ?it/s][A
+Validation DataLoader 0:   0%|          | 0/4 [00:00<?, ?it/s][A
+Validation DataLoader 0: 100%|██████████| 4/4 [00:05<00:00,  0.72it/s][A
+                                                                      [AEpoch 1: 100%|██████████| 4/4 [00:14<00:00,  0.27it/s, v_num=n0e2, val_loss=1.750, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000131]Epoch 1: 100%|██████████| 4/4 [00:14<00:00,  0.27it/s, v_num=n0e2, val_loss=1.750, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000131]Epoch 1: 100%|██████████| 4/4 [00:14<00:00,  0.27it/s, v_num=n0e2, val_loss=1.750, val_loss_nodule=1.440, val_dice_lung=0.000, val_dice_nodule=0.000131]
+
+Run directory: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs/debug/real_100/20261020_111837_597840
+Best checkpoint: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs/debug/real_100/20261020_111837_597840/checkpoints/epoch=000-nodule_dice=0.0001.ckpt
+Best checkpoint monitor value: metatensor(0.0001, device='cuda:0')
+
+Generating report from best checkpoint: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs/debug/real_100/20261020_111837_597840/checkpoints/epoch=000-nodule_dice=0.0001.ckpt
+Report: validation cases 10/104
+Report: validation cases 20/104
+Report: validation cases 30/104
+Report: validation cases 40/104
+Report: validation cases 50/104
+Report: validation cases 60/104
+Report: validation cases 70/104
+Report: validation cases 80/104
+Report: validation cases 90/104
+Report: validation cases 100/104
+Report: validation cases 104/104
+Report saved: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs/debug/real_100/20261020_111837_597840/report/report.png
+background (104 eligible cases): {'dice': 0.7601789451942366, 'precision': 0.8296681146600947, 'recall': 0.7019717912786765}
+lung (104 eligible cases): {'dice': 0.0, 'precision': 0.0, 'recall': 0.0}
+nodule (98 eligible cases): {'dice': 7.607423989902722e-05, 'precision': 3.807199337701709e-05, 'recall': 0.14877409198364688}
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mreal_100_lung+nodule_20261020_111837_597840[0m at: [34mhttps://wandb.ai/diogo-j-mendes-inesc-tec/LungGiants/runs/qv0vn0e2[0m

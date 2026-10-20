@@ -9,5 +9,7 @@
 # Commands / scripts to run
 python -u train.py \
     --experiment configs/experiments/real_100.yaml \
+    --config configs/training.yaml \
+    --classes lung+nodule \
     "$@"
 
