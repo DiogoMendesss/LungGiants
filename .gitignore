@@ -9,3 +9,6 @@ converted/
 
 # Notebook checkpoints
 .ipynb_checkpoints/
+
+#Models
+.ckpt
