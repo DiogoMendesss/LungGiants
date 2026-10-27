@@ -14,6 +14,7 @@ from monai.losses import DiceLoss
 from torch import nn
 
 from data.datamodule import NoduleDataModule
+from data.experiment_data import save_case_manifest
 from models.segresnet import SegResNet
 from tasks import CLASS_CHOICES, class_ids, output_channels, predict_labels, validate_classes
 
@@ -214,6 +215,9 @@ def main():
     print(f"Experiment: {experiment['name']}")
     print(f"Classes: {classes}")
     print(f"Training cases: {len(datamodule.train_dataset)}")
+    for source in ("real", "synthetic"):
+        count = sum(case["source"] == source for case in datamodule.train_dataset.data)
+        print(f"  {source}: {count}")
     print(f"Validation cases: {len(datamodule.val_dataset)}")
 
     model = SegmentationModule(
@@ -237,6 +241,7 @@ def main():
     # Preserve the exact configuration and patient split.
     config_dir = run_dir / "configs"
     config_dir.mkdir()
+    save_case_manifest(config_dir / "selected_cases.json", datamodule._case_lists)
 
     for source, filename in (
         (args.config, "training_source.yaml"),

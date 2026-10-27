@@ -31,18 +31,34 @@ real:
       ts_masks: preprocessed/test/LNDb/ts_out
 
 synthetic:
-  maisi_real_masks:
+  maisi_ct:
+    conditioned_on_real: true
     images: preprocessed/MAISI/results_ln_cases/images
-    mask_source: real_train
+    nod_masks: preprocessed/MAISI/results_ln_cases/nodulemask
+    ts_masks: preprocessed/MAISI/results_ln_cases/ts_out # Not present on NAS at implementation time.
 
-  maisi_synthetic_masks:
+  maisi_maskct:
+    conditioned_on_real: false
     images: preprocessed/MAISI/results_synth_maskct/images
-    masks: preprocessed/MAISI/results_synth_maskct/masks
+    nod_masks: preprocessed/MAISI/results_synth_maskct/masks # Binary nodule masks.
+    ts_masks: preprocessed/MAISI/results_synth_maskct/masks_132
 
   land:
-    images: preprocessed/LAND/results_inf_real/volumes  # Fill in the preprocessed CT folder.
-    mask_source: real_train
+    conditioned_on_real: true
+    images: preprocessed/LAND/results_inf_real/volumes
+    nod_masks:
+      - preprocessed/LAND/results_inf_real/masks/train/LIDC_IDRI/nodulemask
+      - preprocessed/LAND/results_inf_real/masks/train/LNDb/nodulemask
+    ts_masks:
+      - preprocessed/LAND/results_inf_real/masks/train/LIDC_IDRI/ts_out
+      - preprocessed/LAND/results_inf_real/masks/train/LNDb/ts_out
 
   lungddpm:
-    images: preprocessed/LungDDPM/results_inf_real/volumes  # Fill in the preprocessed CT folder.
-    mask_source: real_train
+    conditioned_on_real: true
+    images: preprocessed/LungDDPM/results_inf_real/volumes
+    nod_masks:
+      - preprocessed/train/LIDC_IDRI/nodulemask
+      - preprocessed/train/LNDb/nodulemask
+    ts_masks:
+      - preprocessed/train/LIDC_IDRI/ts_out
+      - preprocessed/train/LNDb/ts_out

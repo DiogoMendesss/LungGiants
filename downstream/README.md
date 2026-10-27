@@ -47,6 +47,83 @@ python -m data.check_data --classes lung+nodule
 python -m data.dataset_index --classes lung+nodule
 ```
 
+## Real + synthetic training
+
+Validation and test always contain the complete, fixed **real-only** splits.
+Only the training cohort changes. Available synthetic sources are `lungddpm`,
+`land`, `maisi_ct`, and `maisi_maskct`, with paths in `configs/datasets.yaml`.
+The former placeholder names `maisi_real_masks` and `maisi_synthetic_masks`
+have been replaced by `maisi_ct` and `maisi_maskct` respectively.
+
+Both `real_percent` and `synthetic_percent` refer to the full real training
+pool **after validation is removed**, not to the resulting mixed dataset or
+the available synthetic pool. Counts round to the nearest integer, with .5
+rounded upward. For the saved 932-case training pool, 50/50 gives 466 real
+and 466 synthetic CTs; 100/50 gives 932 real and 466 synthetic CTs.
+
+For real-conditioned generators (`lungddpm`, `land`, `maisi_ct`):
+
+- Partial mixes summing to 100% select the real subset first, then use synthetic
+  versions of exactly the remaining training patients. No patient occurs as
+  both real and synthetic. For odd cohort sizes the synthetic count is the
+  exact complement of the rounded real count.
+- When either percentage is 100%, real and synthetic subsets are selected
+  independently from the real training patient pool, allowing both versions
+  of the same patient. Synthetic-only training is also supported.
+- Other mixes with both percentages strictly between 0 and 100 are rejected
+  until their overlap policy is defined.
+- Selection uses the dataset split seed (42), preserving LIDC/LNDb proportions.
+  The same percentages choose the same patients across generators. Existing
+  real-only subset selection is preserved.
+- Generated validation/test patients are excluded, even at 100% synthetic.
+  Unknown conditioning IDs and missing selected CTs/masks produce errors;
+  the loader does not substitute different patients.
+
+`maisi_maskct` has independent synthetic identities. Its cases are sampled
+without replacement from sorted IDs using the same seed, with the requested
+count based on the real training pool. Insufficient supply produces an error.
+Its binary nodule masks come from `masks`, and lung labels from `masks_132`.
+As with real TS masks, lung labels are 28--32 and nodules override lung labels.
+
+LungDDPM uses the original real conditioning masks; LAND and MAISI CT use the
+generator-specific mask paths supplied in the dataset config. Mask folder
+settings accept either one path or a list, rejecting duplicate case IDs across
+folders. Nodule mode needs only `nod_masks`; joint mode also needs `ts_masks`.
+All selected masks must match the CT shape and affine at loading time; this
+pipeline checks alignment but does not resample masks.
+
+Example commands, run from `downstream`:
+
+```bash
+# Inspect the selected counts and export exact paths/IDs without training.
+python -m data.experiment_data \
+  --experiment configs/experiments/real_50_lungddpm_50.yaml \
+  --classes lung+nodule --manifest selected_cases.json
+
+# Check one training and validation batch on the training machine.
+python train.py --experiment configs/experiments/real_50_lungddpm_50.yaml \
+  --classes lung+nodule --fast-dev-run
+
+# Submit the full run; the launcher forwards the experiment override.
+sbatch --job-name=train_real50_lungddpm50 train.sh \
+  --experiment configs/experiments/real_50_lungddpm_50.yaml --classes lung+nodule
+```
+
+Equivalent 50/50 configs are included for all four generators. To change the
+mix, copy one and edit its `name`, `real_percent`, and `synthetic_percent`.
+For real-only runs, use `synthetic_percent: 0` and `synthetic_dataset: null`.
+The cohort stays fixed across epochs; the DataLoader shuffles all selected
+samples together, without enforcing per-batch proportions or oversampling.
+Each run saves `configs/selected_cases.json` with the exact train/val/test
+paths, unique `sample_id`, real/synthetic `source`, generator/dataset, and
+conditioning patient/dataset (empty for independently generated cases).
+
+Run selection and loading regressions with:
+
+```bash
+python -m pytest tests/test_mixed_data.py
+```
+
 ## Losses and model selection
 
 The training objective is `dice_weight * Dice + entropy_weight * entropy`, where
