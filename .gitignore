@@ -11,4 +11,4 @@ converted/
 .ipynb_checkpoints/
 
 #Models
-.ckpt
+*.ckpt

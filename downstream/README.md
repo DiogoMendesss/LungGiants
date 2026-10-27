@@ -132,3 +132,27 @@ Run regression tests with:
 ```bash
 python -m pytest tests/test_segmentation_modes.py tests/test_reporting.py
 ```
+
+
+## DataLoader multiprocessing
+
+Worker processes use `data.sharing_strategy: file_system` to avoid the Linux
+file-descriptor transfer path that can fail with `received 0 items of ancdata`
+when descriptors are exhausted. The strategy is set inside each worker, so it
+also applies with the `spawn` start method. MONAI transform seeding is preserved.
+Set this option to `null` to retain the platform's default strategy.
+
+`data.prefetch_factor: 1` limits each worker to one prefetched batch of full CT
+volumes. Both worker options are ignored with `data.num_workers: 0`, including
+`--fast-dev-run`. Train, validation, and test loaders use the same settings.
+
+If loading still fails, set `data.num_workers: 0` for a diagnostic run. On the
+compute node, inspect `ulimit -n`, `df -h /dev/shm`, and the Slurm job's memory/OOM
+logs. The `file_system` strategy still uses shared memory; it does not remove
+RAM or shared-memory capacity limits. Reduce worker count if memory is tight.
+
+Run the worker regression tests from `downstream` in the training environment:
+
+```bash
+python -m pytest tests/test_dataloader_workers.py
+```

@@ -1,0 +1,6 @@
+name: real_100
+
+data:
+  real_percent: 100
+  synthetic_percent: 0
+  synthetic_dataset: null

@@ -6,6 +6,8 @@ data:
   eval_batch_size: 1
   num_workers: 8
   pin_memory: false
+  sharing_strategy: file_system # Avoid file-descriptor transfer for worker tensors.
+  prefetch_factor: 1 # Batches queued per worker; ignored when num_workers is zero.
   expected_shape: [256, 256, 128]
   hu_min: -1000
   hu_max: 1000
@@ -39,7 +41,7 @@ trainer:
   accelerator: gpu
   devices: 1
   precision: 16-mixed
-  max_epochs: 1
+  max_epochs: 300
   log_every_n_steps: 100
   enable_progress_bar: true
 

@@ -1,10 +1,22 @@
 """Lightning DataModule for full-volume nodule segmentation."""
 
+from functools import partial
+
 import lightning.pytorch as pl
+import torch.multiprocessing as multiprocessing
 from monai.data import Dataset, DataLoader
+from monai.data.utils import worker_init_fn
 
 from data.experiment_data import build_experiment_data
 from data.transforms import build_transforms
+
+
+def initialize_loader_worker(worker_id, sharing_strategy):
+    """Configure tensor IPC in each worker, including workers started by spawn."""
+    if sharing_strategy is not None:
+        multiprocessing.set_sharing_strategy(sharing_strategy)
+    # Preserve MONAI's initialization of randomizable dataset transforms.
+    worker_init_fn(worker_id)
 
 
 class NoduleDataModule(pl.LightningDataModule):
@@ -21,8 +33,18 @@ class NoduleDataModule(pl.LightningDataModule):
         hu_min=-1000,
         hu_max=1000,
         classes="nodule",
+        sharing_strategy="file_system",
+        prefetch_factor=1,
     ):
         super().__init__()
+        if num_workers > 0:
+            if (
+                sharing_strategy is not None
+                and sharing_strategy not in multiprocessing.get_all_sharing_strategies()
+            ):
+                raise ValueError(f"Unsupported tensor sharing strategy: {sharing_strategy}")
+            if prefetch_factor < 1:
+                raise ValueError("prefetch_factor must be at least 1.")
         self.save_hyperparameters()
 
         self.train_dataset = None
@@ -84,6 +106,16 @@ class NoduleDataModule(pl.LightningDataModule):
                 "Dataset has not been initialized. Call setup() first."
             )
 
+        worker_options = {}
+        if self.hparams.num_workers > 0:
+            worker_options = {
+                "prefetch_factor": self.hparams.prefetch_factor,
+                "worker_init_fn": partial(
+                    initialize_loader_worker,
+                    sharing_strategy=self.hparams.sharing_strategy,
+                ),
+            }
+
         return DataLoader(
             dataset=dataset,
             batch_size=batch_size,
@@ -92,6 +124,7 @@ class NoduleDataModule(pl.LightningDataModule):
             pin_memory=self.hparams.pin_memory,
             persistent_workers=self.hparams.num_workers > 0,
             drop_last=False,
+            **worker_options,
         )
 
     def train_dataloader(self):

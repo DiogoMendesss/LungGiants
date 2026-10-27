@@ -1,0 +1,221 @@
+{
+  "experiment": "real_100",
+  "classes": "lung+nodule",
+  "reported_class": "nodule",
+  "checkpoint": "/nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100/20261020_190006_782295/checkpoints/epoch=035-nodule_dice=0.4985.ckpt",
+  "checkpoint_monitor": "val_dice_nodule",
+  "checkpoint_mode": "max",
+  "class_id": 2,
+  "eligible_cases": 98,
+  "excluded_empty_cases": 6,
+  "mean_metrics": {
+    "dice": 0.49840469311299745,
+    "precision": 0.5767881789008972,
+    "recall": 0.5179893742118457
+  },
+  "examples": [
+    {
+      "rank": "Best 1",
+      "patient_id": "LIDC-IDRI-0732",
+      "case_id": "LIDC-IDRI-0732",
+      "dataset": "LIDC_IDRI",
+      "dice": 0.9076620825147348,
+      "precision": 0.90234375,
+      "recall": 0.9130434782608695,
+      "axial_slice_index_ras": 99
+    },
+    {
+      "rank": "Best 2",
+      "patient_id": "LIDC-IDRI-0237",
+      "case_id": "LIDC-IDRI-0237",
+      "dataset": "LIDC_IDRI",
+      "dice": 0.898876404494382,
+      "precision": 0.8955223880597015,
+      "recall": 0.9022556390977443,
+      "axial_slice_index_ras": 72
+    },
+    {
+      "rank": "Worst 1",
+      "patient_id": "LNDb-0267",
+      "case_id": "LNDb-0267",
+      "dataset": "LNDb",
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "axial_slice_index_ras": 79
+    },
+    {
+      "rank": "Worst 2",
+      "patient_id": "LNDb-0127",
+      "case_id": "LNDb-0127",
+      "dataset": "LNDb",
+      "dice": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "axial_slice_index_ras": 96
+    }
+  ],
+  "per_class": {
+    "background": {
+      "class_id": 0,
+      "eligible_cases": 104,
+      "excluded_empty_cases": 0,
+      "mean_metrics": {
+        "dice": 0.9978308780367293,
+        "precision": 0.997610265426251,
+        "recall": 0.9980524360988732
+      },
+      "examples": [
+        {
+          "rank": "Best 1",
+          "patient_id": "LIDC-IDRI-0164",
+          "case_id": "LIDC-IDRI-0164",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9990528794095527,
+          "precision": 0.999333017812788,
+          "recall": 0.9987728980221079,
+          "axial_slice_index_ras": 0
+        },
+        {
+          "rank": "Best 2",
+          "patient_id": "LIDC-IDRI-0237",
+          "case_id": "LIDC-IDRI-0237",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9988305707285032,
+          "precision": 0.9989124431280988,
+          "recall": 0.9987487117485832,
+          "axial_slice_index_ras": 0
+        },
+        {
+          "rank": "Worst 1",
+          "patient_id": "LNDb-0068",
+          "case_id": "LNDb-0068",
+          "dataset": "LNDb",
+          "dice": 0.9935292976098268,
+          "precision": 0.9939989434702161,
+          "recall": 0.9930600953375739,
+          "axial_slice_index_ras": 119
+        },
+        {
+          "rank": "Worst 2",
+          "patient_id": "LIDC-IDRI-0921",
+          "case_id": "LIDC-IDRI-0921",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9944595379473932,
+          "precision": 0.9905814347394772,
+          "recall": 0.9983681258694286,
+          "axial_slice_index_ras": 0
+        }
+      ]
+    },
+    "lung": {
+      "class_id": 1,
+      "eligible_cases": 104,
+      "excluded_empty_cases": 0,
+      "mean_metrics": {
+        "dice": 0.984867494694008,
+        "precision": 0.9864160457733147,
+        "recall": 0.9833836168307262
+      },
+      "examples": [
+        {
+          "rank": "Best 1",
+          "patient_id": "LNDb-0140",
+          "case_id": "LNDb-0140",
+          "dataset": "LNDb",
+          "dice": 0.990006681089144,
+          "precision": 0.9891723935763906,
+          "recall": 0.9908423770989485,
+          "axial_slice_index_ras": 60
+        },
+        {
+          "rank": "Best 2",
+          "patient_id": "LIDC-IDRI-0879",
+          "case_id": "LIDC-IDRI-0879",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9893053405327144,
+          "precision": 0.9892474174886075,
+          "recall": 0.9893632703603122,
+          "axial_slice_index_ras": 41
+        },
+        {
+          "rank": "Worst 1",
+          "patient_id": "LIDC-IDRI-0166",
+          "case_id": "LIDC-IDRI-0166",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9527261447970039,
+          "precision": 0.9909321317190846,
+          "recall": 0.917356895549391,
+          "axial_slice_index_ras": 61
+        },
+        {
+          "rank": "Worst 2",
+          "patient_id": "LNDb-0068",
+          "case_id": "LNDb-0068",
+          "dataset": "LNDb",
+          "dice": 0.9538710038216893,
+          "precision": 0.950662263160333,
+          "recall": 0.9571014785658,
+          "axial_slice_index_ras": 73
+        }
+      ]
+    },
+    "nodule": {
+      "class_id": 2,
+      "eligible_cases": 98,
+      "excluded_empty_cases": 6,
+      "mean_metrics": {
+        "dice": 0.49840469311299745,
+        "precision": 0.5767881789008972,
+        "recall": 0.5179893742118457
+      },
+      "examples": [
+        {
+          "rank": "Best 1",
+          "patient_id": "LIDC-IDRI-0732",
+          "case_id": "LIDC-IDRI-0732",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.9076620825147348,
+          "precision": 0.90234375,
+          "recall": 0.9130434782608695,
+          "axial_slice_index_ras": 99
+        },
+        {
+          "rank": "Best 2",
+          "patient_id": "LIDC-IDRI-0237",
+          "case_id": "LIDC-IDRI-0237",
+          "dataset": "LIDC_IDRI",
+          "dice": 0.898876404494382,
+          "precision": 0.8955223880597015,
+          "recall": 0.9022556390977443,
+          "axial_slice_index_ras": 72
+        },
+        {
+          "rank": "Worst 1",
+          "patient_id": "LNDb-0267",
+          "case_id": "LNDb-0267",
+          "dataset": "LNDb",
+          "dice": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "axial_slice_index_ras": 79
+        },
+        {
+          "rank": "Worst 2",
+          "patient_id": "LNDb-0127",
+          "case_id": "LNDb-0127",
+          "dataset": "LNDb",
+          "dice": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "axial_slice_index_ras": 96
+        }
+      ]
+    }
+  },
+  "prediction_rule": "argmax over class logits",
+  "prediction_threshold": null,
+  "averaging": "arithmetic mean of per-case metrics; empty GT excluded per class",
+  "precision_when_no_predicted_foreground": 0.0,
+  "lung_definition": "class 1 excludes nodule voxels"
+}

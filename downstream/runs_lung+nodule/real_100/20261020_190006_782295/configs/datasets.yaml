@@ -1,0 +1,48 @@
+root: /nas-ctm01/datasets/public/LungNodule-nifti
+
+
+split:
+  validation_fraction: 0.10
+  seed: 42
+  stratify_by_dataset: true
+
+real:
+  train:
+    LIDC_IDRI:
+      images: preprocessed/train/LIDC_IDRI/ct
+      nod_masks: preprocessed/train/LIDC_IDRI/nodulemask
+      ts_masks: preprocessed/train/LIDC_IDRI/ts_out
+
+    LNDb:
+      images: preprocessed/train/LNDb/ct
+      nod_masks: preprocessed/train/LNDb/nodulemask
+      ts_masks: preprocessed/train/LNDb/ts_out
+      
+
+  test:
+    LIDC_IDRI:
+      images: preprocessed/test/LIDC_IDRI/ct
+      nod_masks: preprocessed/test/LIDC_IDRI/nodulemask
+      ts_masks: preprocessed/test/LIDC_IDRI/ts_out
+
+    LNDb:
+      images: preprocessed/test/LNDb/ct
+      nod_masks: preprocessed/test/LNDb/nodulemask
+      ts_masks: preprocessed/test/LNDb/ts_out
+
+synthetic:
+  maisi_real_masks:
+    images: preprocessed/MAISI/results_ln_cases/images
+    mask_source: real_train
+
+  maisi_synthetic_masks:
+    images: preprocessed/MAISI/results_synth_maskct/images
+    masks: preprocessed/MAISI/results_synth_maskct/masks
+
+  land:
+    images: preprocessed/LAND/results_inf_real/volumes  # Fill in the preprocessed CT folder.
+    mask_source: real_train
+
+  lungddpm:
+    images: preprocessed/LungDDPM/results_inf_real/volumes  # Fill in the preprocessed CT folder.
+    mask_source: real_train
