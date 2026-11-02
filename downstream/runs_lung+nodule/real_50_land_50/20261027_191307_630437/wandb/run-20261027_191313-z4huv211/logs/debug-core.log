@@ -1,0 +1,16 @@
+{"time":"2026-10-27T19:13:13.031448573Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpcomz1y1o/port-3943888.txt","pid":3943888,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-10-27T19:13:13.033924118Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":3943888}
+{"time":"2026-10-27T19:13:13.033850823Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-3943888-3944098-1139968208/socket","Net":"unix"}}
+{"time":"2026-10-27T19:13:13.213341522Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-10-27T19:13:13.570869357Z","level":"INFO","msg":"handleInformInit: received","streamId":"z4huv211","id":"1(@)"}
+{"time":"2026-10-27T19:13:13.602786002Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"z4huv211","id":"1(@)"}
+{"time":"2026-10-27T19:13:21.129632302Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"0i8jrjibyvnn"}
+{"time":"2026-10-28T05:59:23.919244919Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-10-28T05:59:23.919683984Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-10-28T05:59:23.919664305Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-10-28T05:59:23.919860012Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-10-28T05:59:23.919693723Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-10-28T05:59:23.920095242Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-3943888-3944098-1139968208/socket","Net":"unix"}}
+{"time":"2026-10-28T05:59:25.383624988Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-10-28T05:59:25.499613075Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-10-28T05:59:25.499657744Z","level":"INFO","msg":"server: all connections closed"}

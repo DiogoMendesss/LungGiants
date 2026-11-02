@@ -30,8 +30,8 @@ class NoduleDataModule(pl.LightningDataModule):
         num_workers=4,
         pin_memory=True,
         expected_shape=(256, 256, 128),
-        hu_min=-1000,
-        hu_max=1000,
+        in_min=0.0,
+        in_max=1.0,
         classes="nodule",
         sharing_strategy="file_system",
         prefetch_factor=1,
@@ -95,8 +95,8 @@ class NoduleDataModule(pl.LightningDataModule):
         """Create a separate transform pipeline for each dataset."""
         return build_transforms(
             expected_shape=self.hparams.expected_shape,
-            hu_min=self.hparams.hu_min,
-            hu_max=self.hparams.hu_max,
+            in_min=self.hparams.in_min,
+            in_max=self.hparams.in_max,
             classes=self.hparams.classes,
         )
 

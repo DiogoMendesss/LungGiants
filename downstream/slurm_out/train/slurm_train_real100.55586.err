@@ -1,0 +1,38 @@
+[rank: 0] Seed set to 42
+wandb: WARNING The anonymous setting has no effect and will be removed in a future version.
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /nas-ctm01/homes/djmendes/.netrc.
+wandb: Currently logged in as: diogo-j-mendes (diogo-j-mendes-inesc-tec) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run z4huv211
+wandb: Tracking run with wandb version 0.30.0
+wandb: Run data is saved locally in runs_lung+nodule/real_50_land_50/20261027_191307_630437/wandb/run-20261027_191313-z4huv211
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run real_50_land_50_lung+nodule_20261027_191307_630437
+wandb: ⭐️ View project at https://wandb.ai/diogo-j-mendes-inesc-tec/LungGiants
+wandb: 🚀 View run at https://wandb.ai/diogo-j-mendes-inesc-tec/LungGiants/runs/z4huv211
+/nas-ctm01/homes/djmendes/.conda/envs/gen/lib/python3.11/site-packages/lightning/fabric/plugins/environments/slurm.py:204: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python train.py --experiment configs/experiments/real_50_la ...
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nas-ctm01/homes/djmendes/.conda/envs/gen/lib/python3.11/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py:242: Precision 16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+Metric val_loss_nodule improved. New best score: 1.039
+Metric val_loss_nodule improved by 0.022 >= min_delta = 0.001. New best score: 1.016
+Metric val_loss_nodule improved by 0.010 >= min_delta = 0.001. New best score: 1.007
+Metric val_loss_nodule improved by 0.003 >= min_delta = 0.001. New best score: 1.003
+Metric val_loss_nodule improved by 0.001 >= min_delta = 0.001. New best score: 1.002
+Metric val_loss_nodule improved by 0.001 >= min_delta = 0.001. New best score: 1.001
+Metric val_loss_nodule improved by 0.015 >= min_delta = 0.001. New best score: 0.986
+Metric val_loss_nodule improved by 0.007 >= min_delta = 0.001. New best score: 0.979
+Metric val_loss_nodule improved by 0.020 >= min_delta = 0.001. New best score: 0.959
+Metric val_loss_nodule improved by 0.034 >= min_delta = 0.001. New best score: 0.925
+Metric val_loss_nodule improved by 0.007 >= min_delta = 0.001. New best score: 0.917
+Metric val_loss_nodule improved by 0.005 >= min_delta = 0.001. New best score: 0.913
+Metric val_loss_nodule improved by 0.009 >= min_delta = 0.001. New best score: 0.904
+Metric val_loss_nodule improved by 0.012 >= min_delta = 0.001. New best score: 0.893
+Metric val_loss_nodule improved by 0.009 >= min_delta = 0.001. New best score: 0.883
+Metric val_loss_nodule improved by 0.013 >= min_delta = 0.001. New best score: 0.870
+Metric val_loss_nodule improved by 0.001 >= min_delta = 0.001. New best score: 0.869
+Metric val_loss_nodule improved by 0.005 >= min_delta = 0.001. New best score: 0.864
+Metric val_loss_nodule improved by 0.013 >= min_delta = 0.001. New best score: 0.851
+Monitored metric val_loss_nodule did not improve in the last 20 records. Best score: 0.851. Signaling Trainer to stop.

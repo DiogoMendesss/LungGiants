@@ -1,5 +1,7 @@
 """Load aligned CT/masks and construct the requested segmentation target."""
 
+import math
+
 import torch
 from monai.transforms import (
     Compose, EnsureChannelFirstd, EnsureTyped, LoadImaged,
@@ -59,24 +61,52 @@ class CheckPairGeometryd(MapTransform):
         return data
 
 
+class ValidateIntensityRanged(MapTransform):
+    """Require finite image intensities in [0, 1] without modifying the tensor."""
+
+    def __init__(self):
+        super().__init__(keys=["image"])
+
+    def __call__(self, data):
+        case_id = data.get("case_id", data.get("patient_id", "unknown"))
+        for key in self.key_iterator(data):
+            image = data[key]
+            if not torch.isfinite(image).all():
+                raise ValueError(f"{case_id}: {key} contains non-finite intensities.")
+            observed_min, observed_max = image.amin().item(), image.amax().item()
+            if observed_min < 0.0 or observed_max > 1.0:
+                raise ValueError(
+                    f"{case_id}: {key} intensities must be in [0, 1] when "
+                    f"in_min=0 and in_max=1; observed [{observed_min}, {observed_max}]."
+                )
+        return data
+
+
 def build_transforms(
     expected_shape=(256, 256, 128),
-    hu_min=-1000,
-    hu_max=1000,
+    in_min=0.0,
+    in_max=1.0,
     classes="nodule",
 ):
-    """Construct labels on load; already aligned masks are not resampled."""
-    if hu_min >= hu_max:
-        raise ValueError("hu_min must be smaller than hu_max.")
+    """Validate [0, 1] inputs, otherwise clip/rescale; masks are not resampled."""
+    if not (math.isfinite(in_min) and math.isfinite(in_max)):
+        raise ValueError("in_min and in_max must be finite.")
+    if in_min >= in_max:
+        raise ValueError("in_min must be smaller than in_max.")
     keys = ["image", *mask_keys(classes)]
+    intensity_transform = (
+        ValidateIntensityRanged()
+        if in_min == 0.0 and in_max == 1.0
+        else ScaleIntensityRanged(
+            keys=["image"], a_min=in_min, a_max=in_max,
+            b_min=0.0, b_max=1.0, clip=True,
+        )
+    )
     return Compose([
         LoadImaged(keys=keys, reader="NibabelReader", image_only=True),
         EnsureChannelFirstd(keys=keys, channel_dim="no_channel"),
         EnsureTyped(keys=keys, dtype=torch.float32, track_meta=True),
         CheckPairGeometryd(expected_shape=expected_shape, classes=classes),
-        ScaleIntensityRanged(
-            keys=["image"], a_min=hu_min, a_max=hu_max,
-            b_min=0.0, b_max=1.0, clip=True,
-        ),
+        intensity_transform,
         ComposeSegmentationLabeld(classes=classes),
     ])

@@ -1,0 +1,16 @@
+{"time":"2026-10-29T20:30:49.756654915Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmp2md6neym/port-1792390.txt","pid":1792390,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-10-29T20:30:49.757433693Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":1792390}
+{"time":"2026-10-29T20:30:49.757440151Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-1792390-1792600-3507671451/socket","Net":"unix"}}
+{"time":"2026-10-29T20:30:49.935624Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-10-29T20:30:50.211887941Z","level":"INFO","msg":"handleInformInit: received","streamId":"nvce94fs","id":"1(@)"}
+{"time":"2026-10-29T20:30:50.245564786Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"nvce94fs","id":"1(@)"}
+{"time":"2026-10-29T20:30:58.162376813Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"5tnkmi3bque1"}
+{"time":"2026-10-30T07:13:09.281264901Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-10-30T07:13:09.281731507Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-10-30T07:13:09.281763023Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-10-30T07:13:09.281808951Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-10-30T07:13:09.281791358Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-10-30T07:13:09.28217336Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-1792390-1792600-3507671451/socket","Net":"unix"}}
+{"time":"2026-10-30T07:13:10.722161287Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-10-30T07:13:10.839511751Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-10-30T07:13:10.839573922Z","level":"INFO","msg":"server: all connections closed"}

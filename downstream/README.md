@@ -47,6 +47,27 @@ python -m data.check_data --classes lung+nodule
 python -m data.dataset_index --classes lung+nodule
 ```
 
+## Input intensity range
+
+The training/debug configs and DataModule default to preprocessed volumes:
+
+```yaml
+data:
+  in_min: 0.0
+  in_max: 1.0
+```
+
+With exactly these bounds, loading validates that every image voxel is finite
+and in the inclusive range [0, 1], without clipping or rescaling. Out-of-range
+values, NaN, and infinity raise an error identifying the case. Shape and affine
+checks and segmentation-label construction still run.
+
+For inputs that need normalization, set `in_min` and `in_max` to their intensity
+window (for example, -1000 and 1000 for raw HU). Values are clipped to that
+window and linearly mapped to [0, 1]. Both bounds must be finite and
+`in_min < in_max`. Rename `hu_min`/`hu_max` in custom configs to
+`in_min`/`in_max`; use 0 and 1 for already preprocessed volumes.
+
 ## Real + synthetic training
 
 Validation and test always contain the complete, fixed **real-only** splits.

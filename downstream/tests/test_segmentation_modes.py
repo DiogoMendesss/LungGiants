@@ -118,6 +118,7 @@ def test_real_nifti_loading_and_shared_split(tmp_path):
         dm = NoduleDataModule(
             datasets_config=str(config_path), experiment_config=str(experiment_path),
             split_path=str(split_path), expected_shape=(8, 8, 8),
+            in_min=-1000, in_max=1000,
             classes=mode, num_workers=0, pin_memory=False,
         )
         dm.setup("fit")

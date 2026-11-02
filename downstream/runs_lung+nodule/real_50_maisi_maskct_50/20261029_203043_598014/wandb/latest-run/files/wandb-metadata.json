@@ -1,0 +1,80 @@
+{
+  "os": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+  "python": "CPython 3.11.15",
+  "startedAt": "2026-10-29T20:30:50.198613Z",
+  "args": [
+    "--experiment",
+    "configs/experiments/real_50_maisi_maskct_50.yaml",
+    "--config",
+    "configs/training.yaml",
+    "--classes",
+    "lung+nodule"
+  ],
+  "program": "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py",
+  "codePath": "downstream/train.py",
+  "codePathLocal": "train.py",
+  "git": {
+    "remote": "https://github.com/DiogoMendesss/LungGiants.git",
+    "commit": "c564bde9dd998dc6c13e43f78cf79382046b1c2d"
+  },
+  "email": "diogo.j.mendes@inesctec.pt",
+  "root": "runs_lung+nodule/real_50_maisi_maskct_50/20261029_203043_598014",
+  "host": "03.ctm-deep-05",
+  "executable": "/nas-ctm01/homes/djmendes/.conda/envs/gen/bin/python",
+  "cpu_count": 32,
+  "cpu_count_logical": 64,
+  "gpu": "Tesla V100-SXM2-32GB",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "105089261568",
+      "used": "41656946688"
+    }
+  },
+  "memory": {
+    "total": "404323426304"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Tesla V100-SXM2-32GB",
+      "memoryTotal": "34359738368",
+      "cudaCores": 5120,
+      "architecture": "Volta",
+      "uuid": "GPU-2a10eda4-3f3a-00ad-3604-deb3551055ea"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "slurm": {
+    "cluster_name": "(null)",
+    "conf": "/etc/slurm/slurm.conf",
+    "cpus_on_node": "64",
+    "gtids": "0",
+    "job_account": "scholar",
+    "job_cpus_per_node": "64",
+    "job_end_time": "1793478619",
+    "job_gid": "1000000",
+    "job_id": "55807",
+    "job_name": "train_real_50_maisi_maskct_50",
+    "job_nodelist": "03.ctm-deep-05",
+    "job_num_nodes": "1",
+    "job_partition": "gpu_min32gb",
+    "job_qos": "gpu_min32gb",
+    "job_start_time": "1793305819",
+    "job_uid": "1000284",
+    "job_user": "djmendes",
+    "jobid": "55807",
+    "localid": "0",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "03.ctm-deep-05",
+    "prio_process": "0",
+    "procid": "0",
+    "submit_dir": "/nas-ctm01/homes/djmendes/LungGiants/downstream",
+    "submit_host": "ctm-login-03.inesctec.pt",
+    "task_pid": "1792389",
+    "tasks_per_node": "64",
+    "topology_addr": "03.ctm-deep-05",
+    "topology_addr_pattern": "node"
+  },
+  "writerId": "hmec4y1tggbvnsyw60av4wooobjbhgql"
+}

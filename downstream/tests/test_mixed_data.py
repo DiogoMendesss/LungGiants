@@ -214,7 +214,9 @@ def test_mixed_nifti_batch_loads(cohort, classes, name):
             else:
                 array[:3, :3, :3] = 28
             nib.save(nib.Nifti1Image(array, np.eye(4)), case[key])
-    dataset = Dataset(records, build_transforms(expected_shape=(4, 4, 4), classes=classes))
+    dataset = Dataset(records, build_transforms(
+        expected_shape=(4, 4, 4), classes=classes, in_min=-1000, in_max=1000,
+    ))
     batch = next(iter(DataLoader(dataset, batch_size=2, num_workers=0)))
     assert batch["source"] == ["real", "synthetic"]
     assert tuple(batch["image"].shape) == (2, 1, 4, 4, 4)
