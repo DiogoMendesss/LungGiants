@@ -1,0 +1,6 @@
+name: real_50_maisi_ct_50
+
+data:
+  real_percent: 50
+  synthetic_percent: 50
+  synthetic_dataset: maisi_ct

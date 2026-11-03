@@ -1,0 +1,24 @@
+[rank: 0] Seed set to 42
+Traceback (most recent call last):
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py", line 317, in <module>
+    main()
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/train.py", line 213, in main
+    datamodule.setup("fit")
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/datamodule.py", line 64, in setup
+    self._case_lists = build_experiment_data(
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/experiment_data.py", line 159, in build_experiment_data
+    synthetic_cases = build_synthetic_cases(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/synthetic_index.py", line 29, in build_synthetic_cases
+    masks = {
+            ^
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/synthetic_index.py", line 30, in <dictcomp>
+    key: index_mask_folders(root, settings[f"{key}s"])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/synthetic_index.py", line 17, in index_mask_folders
+    entries = index_folder(root / folder)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/data/dataset_index.py", line 28, in index_folder
+    raise FileNotFoundError(f"Directory does not exist: {folder}")
+FileNotFoundError: Directory does not exist: /nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/MAISI/results_ln_cases/ts_out
