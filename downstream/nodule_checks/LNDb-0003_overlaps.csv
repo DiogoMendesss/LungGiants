@@ -1,0 +1,6 @@
+annotation,expected_label,overlapping_labels_voxels,annotation_voxels,expected_label_voxels,dice_with_expected_label,bbox_start_zyx,bbox_stop_zyx_exclusive
+LNDb-0003_nodule1.npz,1,{1: 249},249,249,1.0,"(183, 283, 117)","(187, 297, 128)"
+LNDb-0003_nodule2.npz,2,{2: 109},109,109,1.0,"(197, 311, 116)","(199, 322, 124)"
+LNDb-0003_nodule3.npz,3,{3: 83},83,83,1.0,"(199, 303, 126)","(202, 311, 133)"
+LNDb-0003_nodule4.npz,4,{4: 18},18,18,1.0,"(189, 242, 321)","(190, 246, 327)"
+LNDb-0003_nodule5.npz,5,{5: 94},94,94,1.0,"(239, 277, 128)","(242, 286, 136)"

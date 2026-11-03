@@ -232,6 +232,125 @@ python -m pytest tests/test_segmentation_modes.py tests/test_reporting.py
 ```
 
 
+## Standalone validation and test evaluation
+
+From `downstream`, evaluate one saved checkpoint with:
+
+```bash
+python evaluate.py --model-path /path/to/run/checkpoints/best.ckpt
+```
+
+The shell launcher supports direct execution and Slurm submission. From
+`downstream`, activate your training environment and run either:
+
+```bash
+bash evaluate.sh \
+  --model /path/to/run/checkpoints/best.ckpt \
+  --set both \
+  --output-path /path/to/new-report \
+  --device cuda --precision 16-mixed --save-masks
+
+sbatch evaluate.sh \
+  --model /path/to/run/checkpoints/best.ckpt \
+  --set test \
+  --output-path /path/to/new-test-report
+```
+
+`--set` accepts `val`, `test`, or `both` (default). Only selected splits have
+their data loaded and reports generated. `--model` and `--output-path` are
+aliases for `--model-path` and `--output-dir`. An explicit output directory must
+not exist. Remove the output argument from the script to use an automatic
+timestamped directory.
+Use `bash evaluate.sh --help` to see all evaluator options.
+
+Like `train.sh`, the launcher contains a direct `python -u evaluate.py` command
+with editable arguments and a final `"$@"` for command-line overrides. Edit the
+model and output paths in `evaluate.sh`, or provide them when launching it.
+Run or submit from `downstream/` with your training environment activated.
+
+Slurm defaults match `train.sh` (`gpu_min32gb` partition/QoS); override these
+with `sbatch --partition=... --qos=... evaluate.sh ...` if needed. Logs go to
+`slurm_out/evaluate/slurm_evaluate_nodules.<job-id>.out/.err`. Create the log
+directory before submission with `mkdir -p slurm_out/evaluate`.
+
+Alternatively, set `MODEL_PATH` in `evaluate.py` or as an environment variable,
+then run `python evaluate.py`. The evaluator loads the saved network parameters
+and discovers the run's `configs/training.yaml`, `datasets.yaml`, and
+`real_split.json`. It reuses the saved validation/test patients and checks them
+against `selected_cases.json` when available. It does not load synthetic data,
+recreate a split, train the model, or initialize W&B. Inference uses the same
+transforms and hard-label decoding as training, one full volume at a time.
+
+Optional arguments:
+
+```bash
+python evaluate.py --model-path /path/to/best.ckpt \
+  --set both \
+  --config-dir /path/to/run/configs \
+  --data-root /nas-ctm01/datasets/public/LungNodule-nifti \
+  --annotations-root /nas-ctm01/datasets/public/Lung_Nodule \
+  --output-dir /path/to/new-evaluation-directory \
+  --device cuda --precision 16-mixed --save-masks
+```
+
+Without overrides, annotations are read from the sibling `Lung_Nodule` directory.
+Validation annotations come from its `train` folders; test annotations come from
+its `test` folders. On Windows, saved `/nas-...` dataset roots are resolved through
+`Z:/nas-...` if available. GPU/CPU selection is automatic; GPU precision defaults
+to the saved training setting and CPU uses float32. `--save-masks` additionally
+writes semantic predictions and assigned nodule-instance predictions as NIfTI.
+
+Reports default to a new timestamped directory under the run's `evaluation/`.
+Existing output directories are not overwritten. Separate `validation/` and
+`test/` folders each contain:
+
+| File | Contents |
+| --- | --- |
+| `report.html` | Readable mean ± sample standard deviation tables and counts |
+| `case_metrics.csv` | Lung and nodule DSC, precision, recall for every case |
+| `nodule_metrics.csv` | Individual nodule DSC, attributes, voxel counts, and status |
+| `attribute_summary.csv` | All 3 size, 5 sphericity, and 5 spiculation classes |
+| `component_warnings.csv` | Every excluded predicted component, its size, and affected labels |
+| `summary.json` | Summaries, evaluation rules, resolved case paths, and checkpoint provenance |
+
+Per-case metrics use the complete predictions. Lung means class 1 excluding
+nodule voxels. Lung metrics are unavailable for a nodule-only checkpoint.
+Cases with empty GT for a class remain in the CSV with unavailable metrics and
+their predicted voxel counts, but are excluded from that class's means. For
+nonempty GT, an empty prediction scores zero for all three metrics.
+
+Per-nodule matching uses 26-connected predicted components. A component
+overlapping exactly one GT instance is assigned **in full**, including voxels
+outside GT; multiple fragments assigned to the same instance are unioned.
+Components with no GT overlap are excluded only from the attribute analysis.
+Components overlapping multiple GT instances are discarded with a warning;
+affected nodule rows and the split's attribute summaries are provisional.
+Every present GT nodule remains in the analysis, including misses with DSC 0.
+
+The instance mask is the preprocessed mask on the inference grid. Its geometry
+is checked against the CT. Filename `noduleX` maps to label `X+1` for LIDC and
+label `X` for LNDb. Annotation labels absent after preprocessing are reported as
+`missing_from_evaluation_grid`, counted but not scored. GT labels lacking an
+annotation are still scored, with unavailable attributes and a diagnostic.
+Do not substitute binary masks for the original instance-labelled NIfTI masks.
+
+Size uses the stored `equiv_diameter_mm` class (1–3). Shape classes use
+`ceil(median(valid reader ratings))`, accepting values in [1,5], including
+fractional LNDb values such as 1.5 and 2.5; missing or
+invalid values are recorded explicitly. Each attribute mean weights scored
+nodules equally. `n_nodules` counts all identified nodules in the class;
+`n_scored` excludes those missing from the evaluation grid. Reports also count
+misses, ambiguous assignments, missing attributes, and contributing cases.
+Standard deviation uses `ddof=1`; empty groups have unavailable means/std, and
+single-observation groups have unavailable std.
+
+Dependencies are the training environment plus SciPy and NiBabel. Protocol and
+checkpoint/report integration tests can be run with:
+
+```bash
+python -m pytest tests/test_evaluate.py
+```
+
 ## DataLoader multiprocessing
 
 Worker processes use `data.sharing_strategy: file_system` to avoid the Linux

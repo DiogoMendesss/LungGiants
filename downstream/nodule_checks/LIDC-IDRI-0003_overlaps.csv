@@ -1,0 +1,5 @@
+annotation,expected_label,overlapping_labels_voxels,annotation_voxels,expected_label_voxels,dice_with_expected_label,bbox_start_zyx,bbox_stop_zyx_exclusive
+LIDC-IDRI-0003_nodule0.npz,1,{1: 2542},2542,2542,1.0,"(62, 331, 350)","(70, 367, 384)"
+LIDC-IDRI-0003_nodule1.npz,2,{2: 3241},3241,3241,1.0,"(70, 333, 344)","(80, 373, 389)"
+LIDC-IDRI-0003_nodule2.npz,3,{3: 261},261,261,1.0,"(81, 192, 299)","(85, 205, 318)"
+LIDC-IDRI-0003_nodule3.npz,4,{4: 704},704,704,1.0,"(81, 209, 212)","(89, 229, 231)"
