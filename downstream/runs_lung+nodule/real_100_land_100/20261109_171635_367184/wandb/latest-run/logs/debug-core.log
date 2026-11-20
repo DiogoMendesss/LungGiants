@@ -1,0 +1,20 @@
+{"time":"2026-11-09T17:16:39.561350274Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmplqjwcjl7/port-3069847.txt","pid":3069847,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-11-09T17:16:39.562328903Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":3069847}
+{"time":"2026-11-09T17:16:39.562292213Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-3069847-3070059-24438749/socket","Net":"unix"}}
+{"time":"2026-11-09T17:16:39.713383129Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-11-09T17:16:39.990669691Z","level":"INFO","msg":"handleInformInit: received","streamId":"ywnzcf99","id":"1(@)"}
+{"time":"2026-11-09T17:16:40.000344634Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"ywnzcf99","id":"1(@)"}
+{"time":"2026-11-09T17:16:47.119760022Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"olab41f9sbwg"}
+{"time":"2026-11-09T22:47:44.718824288Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: failed to forward metrics"}
+{"time":"2026-11-09T23:15:44.719651702Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: failed to forward metrics"}
+{"time":"2026-11-09T23:34:44.719949809Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: failed to forward metrics"}
+{"time":"2026-11-09T23:58:44.719039579Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: failed to forward metrics"}
+{"time":"2026-11-10T04:01:07.289047033Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-11-10T04:01:07.289353195Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-11-10T04:01:07.289465907Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-11-10T04:01:07.289490821Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-11-10T04:01:07.289586154Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-11-10T04:01:07.289870192Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-3069847-3070059-24438749/socket","Net":"unix"}}
+{"time":"2026-11-10T04:01:08.2836889Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-11-10T04:01:08.851115733Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-11-10T04:01:08.851182181Z","level":"INFO","msg":"server: all connections closed"}

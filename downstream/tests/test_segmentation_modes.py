@@ -67,17 +67,27 @@ def test_label_priority_and_all_lobe_ids():
     assert binary["label"].dtype == torch.float32
 
 
+@pytest.mark.parametrize("key", ["image", "nod_mask", "ts_mask"])
+def test_geometry_rejects_incorrect_shapes(key):
+    data = {name: MetaTensor(torch.zeros((1, 4, 4, 4)))
+            for name in ("image", "nod_mask", "ts_mask")}
+    data[key] = MetaTensor(torch.zeros((1, 3, 4, 4)))
+    with pytest.raises(ValueError, match=key):
+        CheckPairGeometryd((4, 4, 4), "lung+nodule")(data)
+
+
 @pytest.mark.parametrize("mask_key", ["nod_mask", "ts_mask"])
-@pytest.mark.parametrize("mismatch", ["shape", "affine"])
-def test_geometry_rejects_each_mask(mask_key, mismatch):
+def test_geometry_accepts_different_affines_without_modifying_arrays(mask_key):
     data = {key: MetaTensor(torch.zeros((1, 4, 4, 4)))
             for key in ("image", "nod_mask", "ts_mask")}
-    if mismatch == "shape":
-        data[mask_key] = MetaTensor(torch.zeros((1, 3, 4, 4)))
-    else:
-        data[mask_key].affine[0, 3] = 10
-    with pytest.raises(ValueError, match=mask_key):
-        CheckPairGeometryd((4, 4, 4), "lung+nodule")(data)
+    data[mask_key][0, 1, 2, 3] = 7
+    data[mask_key].affine[0, 0] = 2
+    data[mask_key].affine[0, 3] = 10
+    before = data[mask_key].clone()
+    result = CheckPairGeometryd((4, 4, 4), "lung+nodule")(data)
+    assert result is data
+    assert torch.equal(result[mask_key], before)
+    assert torch.equal(result[mask_key].affine, before.affine)
 
 
 def test_real_nifti_loading_and_shared_split(tmp_path):

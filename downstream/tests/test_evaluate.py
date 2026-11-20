@@ -158,26 +158,58 @@ class BackgroundModel(torch.nn.Module):
         return torch.cat((torch.ones_like(image), torch.zeros_like(image), torch.zeros_like(image)), dim=1)
 
 
-def test_joint_reports_separate_splits_and_full_precision_recall(tmp_path):
+def test_joint_report_compares_splits_without_pooling_metrics(tmp_path):
     root, annotations, config_dir, config, saved = make_fixture(tmp_path)
     cases = evaluate.evaluation_cases(config, saved, root, "lung+nodule", annotations)
     assert [row["case_id"] for row in cases["val"]] == ["LNDb-0001"]
-    for split in ("val", "test"):
-        output = tmp_path / split
-        summary = evaluate.evaluate_split(BackgroundModel(), cases[split], "lung+nodule", split,
-                                          output, {"expected_shape": [16, 16, 16]}, torch.device("cpu"),
-                                          "32-true", {"model_path": "test-model"}, save_masks=True)
+
+    class PerfectFixtureModel(torch.nn.Module):
+        def forward(self, image):
+            logits = torch.cat((torch.zeros_like(image), torch.ones_like(image),
+                                torch.zeros_like(image)), dim=1)
+            logits[:, 2, 4:6, 4:6, 4:6] = 2
+            return logits
+
+    output = tmp_path / "comparison"
+    output.mkdir()
+    results = {}
+    for split, model in (("val", BackgroundModel()), ("test", PerfectFixtureModel())):
+        results[split] = evaluate.evaluate_split(
+            model, cases[split], "lung+nodule", split, output,
+            {"expected_shape": [16, 16, 16]}, torch.device("cpu"),
+            "32-true", {"model_path": "test-model"}, save_masks=True,
+        )
+        assert len(list((output / "masks" / split / "LNDb").glob("*.nii.gz"))) == 2
+    combined = evaluate.write_evaluation(output, results)
+    for split, expected in (("val", 0), ("test", 1)):
+        summary = combined["splits"][split]
         assert summary["n_cases"] == 1 and summary["n_scored_nodules"] == 1
         assert not summary["provisional"]
         for name in ("lung", "nodule"):
             for metric in ("dsc", "precision", "recall"):
-                assert summary["case_metrics"][name][metric]["mean"] == 0
-        rows = list(csv.DictReader((output / "case_metrics.csv").open()))
-        assert int(rows[0]["target_voxels"]) == 16 ** 3 - 8  # Lung excludes nodules.
-        assert len(list(csv.DictReader((output / "attribute_summary.csv").open()))) == 13
-        assert len(list((output / "masks" / "LNDb").glob("*.nii.gz"))) == 2
-        assert "Mean ± sample std" in (output / "report.html").read_text(encoding="utf-8")
-        assert json.loads((output / "summary.json").read_text())["split"] == split
+                assert summary["case_metrics"][name][metric]["mean"] == expected
+        assert summary["attribute_metrics"][0]["dsc_mean"] == expected
+    rows = list(csv.DictReader((output / "case_metrics.csv").open()))
+    assert {row["split"] for row in rows} == {"val", "test"}
+    assert len(rows) == 4
+    assert int(rows[0]["target_voxels"]) == 16 ** 3 - 8  # Lung excludes nodules.
+    attributes = list(csv.DictReader((output / "attribute_summary.csv").open()))
+    assert len(attributes) == 26
+    for split, expected in (("val", 0), ("test", 1)):
+        row = next(row for row in attributes if row["split"] == split
+                   and row["attribute"] == "size" and row["class"] == "1")
+        assert float(row["dsc_mean"]) == expected
+    nodules = list(csv.DictReader((output / "nodule_metrics.csv").open()))
+    assert {row["split"] for row in nodules} == {"val", "test"}
+    assert list(csv.DictReader((output / "component_warnings.csv").open())) == []
+    report = (output / "report.html").read_text(encoding="utf-8")
+    assert 'Validation</th>' in report and 'Test</th>' in report
+    assert report.count('rowspan="3" scope="rowgroup"') == 1
+    assert report.count('rowspan="5" scope="rowgroup"') == 2
+    assert report.count('<tbody class="attribute-group">') == 3
+    assert "border-top:3px" in report
+    assert "0.0000 &plusmn; N/A" in report and "1.0000 &plusmn; N/A" in report
+    assert json.loads((output / "summary.json").read_text()) == combined
 
 
 @pytest.mark.parametrize("selection", [None, "both", "val", "test"])
@@ -207,14 +239,23 @@ def test_cli_loads_actual_checkpoint_and_writes_selected_reports(tmp_path, selec
     if selection is not None:
         args.extend(["--set", selection])
     evaluate.main(args)
-    expected_folders = {"validation" if split == "val" else "test" for split in selected}
-    assert {path.name for path in output.iterdir()} == expected_folders
-    for split in expected_folders:
-        summary = json.loads((output / split / "summary.json").read_text())
+    assert {path.name for path in output.iterdir()} == {
+        "report.html", "summary.json", "case_metrics.csv", "nodule_metrics.csv",
+        "attribute_summary.csv", "component_warnings.csv",
+    }
+    combined = json.loads((output / "summary.json").read_text())
+    assert set(combined["splits"]) == set(selected)
+    for summary in combined["splits"].values():
         assert summary["case_metrics"]["nodule"]["dsc"]["mean"] == 0
         assert summary["case_metrics"]["lung"]["n_unavailable"] == 1
         assert summary["case_metrics"]["lung"]["dsc"]["mean"] is None
         assert summary["attribute_metrics"][0]["dsc_mean"] == 0
+    for name in ("case_metrics", "nodule_metrics", "attribute_summary"):
+        rows = list(csv.DictReader((output / f"{name}.csv").open()))
+        assert {row["split"] for row in rows} == set(selected)
+    report = (output / "report.html").read_text(encoding="utf-8")
+    assert ('Validation</th>' in report) == ("val" in selected)
+    assert ('Test</th>' in report) == ("test" in selected)
 
 
 def test_report_marks_merges_provisional_without_filtering_case_metrics(tmp_path):
@@ -234,10 +275,15 @@ def test_report_marks_merges_provisional_without_filtering_case_metrics(tmp_path
             return logits
 
     output = tmp_path / "merged_report"
+    output.mkdir()
     with pytest.warns(UserWarning, match="overlapping multiple GT"):
-        summary = evaluate.evaluate_split(BridgeModel(), cases["val"], "lung+nodule", "val", output,
+        result = evaluate.evaluate_split(BridgeModel(), cases["val"], "lung+nodule", "val", output,
                                           {"expected_shape": [16, 16, 16]}, torch.device("cpu"),
                                           "32-true", {"model_path": "test-model"})
+    evaluate.write_evaluation(output, {"val": result})
+    summary = result["summary"]
+    diagnostics = list(csv.DictReader((output / "component_warnings.csv").open()))
+    assert len(diagnostics) == 1 and diagnostics[0]["split"] == "val"
     assert summary["provisional"] and summary["components"]["ambiguous_count"] == 1
     assert summary["case_metrics"]["nodule"]["dsc"]["mean"] == pytest.approx(4 / 5)
     assert summary["attribute_metrics"][0]["dsc_mean"] == 0
@@ -245,15 +291,32 @@ def test_report_marks_merges_provisional_without_filtering_case_metrics(tmp_path
     assert "PROVISIONAL" in (output / "report.html").read_text(encoding="utf-8")
 
 
-def test_split_overlap_and_geometry_mismatch_are_rejected(tmp_path):
+def test_split_overlap_and_shape_mismatch_are_rejected(tmp_path):
     root, annotations, _, config, saved = make_fixture(tmp_path)
     with pytest.raises(ValueError, match="overlap"):
         evaluate.evaluation_cases(config, {**saved, "train": saved["val"]}, root, "lung+nodule", annotations)
     cases = evaluate.evaluation_cases(config, saved, root, "lung+nodule", annotations)
     bad = cases["val"][0]["ts_mask"]
     img = nib.load(bad)
-    nib.save(nib.Nifti1Image(np.asarray(img.dataobj), np.diag([2., 1., 1., 1.])), bad)
+    nib.save(nib.Nifti1Image(np.asarray(img.dataobj)[:-1], img.affine), bad)
     with pytest.raises(RuntimeError):  # MONAI wraps the geometry validation error.
         evaluate.evaluate_split(BackgroundModel(), cases["val"], "lung+nodule", "val", tmp_path / "out",
                                  {"expected_shape": [16, 16, 16]}, torch.device("cpu"), "32-true",
                                  {"model_path": "test"})
+
+
+def test_attribute_boxplots_use_scored_nodules_and_keep_splits_separate():
+    rows = [{"split": split, "size_class": 1, "sphericity_class": 3,
+             "spiculation_class": 1, "dsc": value,
+             "status": "missed" if value == 0 else "scored"}
+            for split, values in (("val", [0, 0.25, 0.5, 0.75, 1, None]),
+                                  ("test", [1])) for value in values]
+    plot = evaluate.attribute_boxplots({"splits": {"val": {}, "test": {}}}, rows)
+    assert plot.count('<svg ') == 6
+    assert 'Validation: Size' in plot and 'Test: Size' in plot
+    assert 'Level 1: N=5, median=0.5000, Q1=0.2500, Q3=0.7500' in plot
+    assert 'Level 1: N=1, median=1.0000' in plot
+    assert '(N=0)' in plot and '>N/A</text>' in plot
+    assert plot.count('>Missed: 1</text>') == 3
+    assert plot.count('>Missed: 0</text>') == 23
+    assert evaluate.attribute_boxplots({"splits": {"val": {}}}, []).count('>N/A</text>') == 13

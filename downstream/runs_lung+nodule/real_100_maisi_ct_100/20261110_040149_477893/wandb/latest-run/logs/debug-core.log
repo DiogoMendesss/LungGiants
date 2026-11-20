@@ -1,0 +1,20 @@
+{"time":"2026-11-10T04:01:53.1923138Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpy3yi_r0v/port-3070546.txt","pid":3070546,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-11-10T04:01:53.193120495Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":3070546}
+{"time":"2026-11-10T04:01:53.193090522Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-3070546-3070756-594663975/socket","Net":"unix"}}
+{"time":"2026-11-10T04:01:53.347124359Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-11-10T04:01:53.649734783Z","level":"INFO","msg":"handleInformInit: received","streamId":"yhnankkh","id":"1(@)"}
+{"time":"2026-11-10T04:01:53.668992809Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"yhnankkh","id":"1(@)"}
+{"time":"2026-11-10T04:02:01.072523951Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"wqc7fws4bafq"}
+{"time":"2026-11-10T09:02:58.356514535Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: too many concurrent telemetry requests"}
+{"time":"2026-11-10T09:02:58.357625108Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: too many concurrent telemetry requests"}
+{"time":"2026-11-10T09:15:58.651221723Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: too many concurrent telemetry requests"}
+{"time":"2026-11-10T09:44:58.357258856Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: too many concurrent telemetry requests"}
+{"time":"2026-11-11T02:21:05.382118153Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-11-11T02:21:05.382474269Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-11-11T02:21:05.382518131Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-11-11T02:21:05.382532634Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-11-11T02:21:05.382570834Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-11-11T02:21:05.3829287Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-3070546-3070756-594663975/socket","Net":"unix"}}
+{"time":"2026-11-11T02:21:07.562641416Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-11-11T02:21:08.160535709Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-11-11T02:21:08.160599395Z","level":"INFO","msg":"server: all connections closed"}

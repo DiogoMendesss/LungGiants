@@ -33,7 +33,7 @@ NODULE_FIELDS = ["split", "dataset", "case_id", "label_id", "annotation", "statu
                  "assigned_components", "dsc"]
 COMPONENT_FIELDS = ["split", "dataset", "case_id", "component_id", "reason",
                     "voxel_count", "gt_labels"]
-ATTRIBUTE_FIELDS = ["attribute", "class", "n_nodules", "n_scored", "n_cases",
+ATTRIBUTE_FIELDS = ["split", "attribute", "class", "n_nodules", "n_scored", "n_cases",
                     "n_missing_from_grid", "n_missed", "n_ambiguous", "dsc_mean", "dsc_std"]
 
 
@@ -150,54 +150,187 @@ def write_csv(path, rows, fields):
                              for key, value in row.items()})
 
 
-def render_html(path, summary, attributes):
+def attribute_boxplots(summary, nodule_rows):
+    """Render dependency-free SVG box plots from individual scored nodules."""
+    panels = []
+    names = {"val": "Validation", "test": "Test"}
+    for split in summary["splits"]:
+        for attribute, levels in ATTRIBUTES.items():
+            title = f"{names[split]}: {attribute.capitalize()}"
+            parts = [f'<svg viewBox="0 0 420 350" role="img" '
+                     f'aria-label="{html.escape(title)} DSC by attribute level">',
+                     f'<title>{html.escape(title)}</title>']
+            y = lambda value: 260 - 210 * value
+            for tick in np.linspace(0, 1, 6):
+                parts.append(f'<path d="M50 {y(tick):.2f} H400" stroke="#d5dde5"/>'
+                             f'<text x="42" y="{y(tick)+4:.2f}" text-anchor="end">{tick:.1f}</text>')
+            parts.append('<text x="18" y="155" transform="rotate(-90 18 155)" '
+                         'text-anchor="middle">DSC</text>')
+            for index, level in enumerate(levels):
+                x = 50 + (index + 0.5) * 350 / len(levels)
+                group = [row for row in nodule_rows
+                         if row["split"] == split and row[f"{attribute}_class"] == level]
+                scores = np.array([row["dsc"] for row in group
+                                   if row["dsc"] is not None], dtype=float)
+                missed = sum(row.get("status") == "missed" for row in group)
+                parts.append(f'<text x="{x:.2f}" y="280" text-anchor="middle">{level}</text>'
+                             f'<text x="{x:.2f}" y="297" text-anchor="middle">(N={len(scores)})</text>'
+                             f'<text x="{x:.2f}" y="314" text-anchor="middle">Missed: {missed}</text>')
+                if not len(scores):
+                    parts.append(f'<text x="{x:.2f}" y="155" text-anchor="middle">N/A</text>')
+                    continue
+                q1, median, q3 = np.percentile(scores, [25, 50, 75])
+                iqr = q3 - q1
+                inside = scores[(scores >= q1 - 1.5 * iqr) & (scores <= q3 + 1.5 * iqr)]
+                low, high = inside.min(), inside.max()
+                tip = html.escape(f'Level {level}: N={len(scores)}, median={median:.4f}, '
+                                  f'Q1={q1:.4f}, Q3={q3:.4f}, whiskers={low:.4f} to {high:.4f}')
+                parts.append(f'<g><title>{tip}</title>'
+                             f'<path d="M{x:.2f} {y(high):.2f} V{y(low):.2f} '
+                             f'M{x-9:.2f} {y(high):.2f} h18 M{x-9:.2f} {y(low):.2f} h18" '
+                             'stroke="#465b70" fill="none"/>'
+                             f'<rect x="{x-18:.2f}" y="{y(q3):.2f}" width="36" '
+                             f'height="{y(q1)-y(q3):.2f}" fill="#7da2cc" stroke="#465b70"/>'
+                             f'<path d="M{x-18:.2f} {y(median):.2f} h36" stroke="#243b53" stroke-width="2"/>')
+                for value in scores[(scores < low) | (scores > high)]:
+                    parts.append(f'<circle cx="{x:.2f}" cy="{y(value):.2f}" r="2" '
+                                 'fill="#465b70" fill-opacity="0.35"/>')
+                parts.append('</g>')
+            parts.append('<text x="225" y="342" text-anchor="middle">Attribute level</text></svg>')
+            panels.append(f'<figure><figcaption>{html.escape(title)}</figcaption>{"".join(parts)}</figure>')
+    return '<div class="attribute-plots">' + ''.join(panels) + '</div>'
+
+
+def render_html(path, summary, nodule_rows=()):
+    """Compare selected splits without pooling their metrics or counts."""
     def text(value):
         return html.escape(str(value))
 
     def number(value):
         return "N/A" if value is None else f"{value:.4f}"
 
-    def table(headers, rows):
-        return "<table><thead><tr>" + "".join(f"<th>{text(v)}</th>" for v in headers) + \
-            "</tr></thead><tbody>" + "".join("<tr>" + "".join(f"<td>{text(v)}</td>" for v in row)
-                                              + "</tr>" for row in rows) + "</tbody></table>"
+    def score(mean, std):
+        return f"{number(mean)} &plusmn; {number(std)}"
+
+    splits = summary["splits"]
+    names = {"val": "Validation", "test": "Test"}
+
+    def table_header(labels, metrics):
+        fixed = "".join(f'<th rowspan="2" scope="col">{text(v)}</th>' for v in labels)
+        groups = "".join(
+            f'<th colspan="{len(metrics)}" scope="colgroup" class="split-start">'
+            f'{names[split]}</th>' for split in splits
+        )
+        columns = "".join(
+            f'<th scope="col" class="{"split-start" if i == 0 else ""}">{text(metric)}</th>'
+            for _ in splits for i, metric in enumerate(metrics)
+        )
+        return f"<thead><tr>{fixed}{groups}</tr><tr>{columns}</tr></thead>"
 
     case_rows = []
-    for name, values in summary["case_metrics"].items():
-        for metric in METRICS:
-            stats = values[metric]
-            case_rows.append([name, metric, stats["n"],
-                              f"{number(stats['mean'])} ± {number(stats['std'])}",
-                              values["n_empty_gt"], values["n_unavailable"]])
-    attribute_rows = [[row["attribute"], row["class"], row["n_nodules"], row["n_scored"],
-                       row["n_missing_from_grid"], row["n_missed"], row["n_ambiguous"],
-                       f"{number(row['dsc_mean'])} ± {number(row['dsc_std'])}"] for row in attributes]
-    status = "PROVISIONAL: components overlap multiple GT nodules; inspect component_warnings.csv." \
-        if summary["provisional"] else "No components overlap multiple GT nodules."
-    content = f"""<!doctype html><html lang="en"><meta charset="utf-8">
-<title>{text(summary['split'])} segmentation evaluation</title>
-<style>body{{font:15px system-ui;max-width:1200px;margin:35px auto;padding:0 20px;color:#222}}
-table{{border-collapse:collapse;width:100%;margin:20px 0}}td,th{{padding:9px;border:1px solid #ddd;text-align:left}}
-th{{background:#eef3f7}}code{{overflow-wrap:anywhere}}</style>
-<h1>{text(summary['split'])} evaluation</h1><p>Checkpoint: <code>{text(summary['model_path'])}</code></p>
-<p>{text(status)}</p><h2>Per-case metrics</h2>
-{table(['Class','Metric','Scored cases','Mean ± sample std','Empty GT','Unavailable'], case_rows)}
-<h2>Per-nodule attribute DSC</h2>
-{table(['Attribute','Class','Total nodules','Scored','Missing from grid','Missed','Ambiguous','Mean ± sample std'], attribute_rows)}
-<p>Unmatched predicted components: {summary['components']['unmatched_count']}
-({summary['components']['unmatched_voxels']} voxels). Ambiguous components:
-{summary['components']['ambiguous_count']}.</p>
-<p>Missing/invalid attribute counts: {text(summary['missing_attributes'])}.</p>
-<p>All per-case metrics use the full prediction. Attribute DSC excludes unmatched and ambiguous
-components, retains missed nodules as zero, and averages individual nodule scores equally.
-Nodules absent from the evaluation grid are counted but not scored. Empty-GT case metrics are
-unavailable and excluded. Lung is class 1, excluding nodules, and is unavailable for nodule-only models.
-Standard deviation uses ddof=1; it is unavailable for fewer than two observations.</p>
-<p><a href="case_metrics.csv">Per-case CSV</a> · <a href="nodule_metrics.csv">Per-nodule CSV</a> ·
-<a href="attribute_summary.csv">Attribute summaries</a> ·
-<a href="component_warnings.csv">Discarded components</a> · <a href="summary.json">Full metadata</a></p>
-</html>"""
+    for name in ("lung", "nodule"):
+        cells = [f'<th scope="row">{name.capitalize()}</th>']
+        for values in splits.values():
+            for i, metric in enumerate(METRICS):
+                stats = values["case_metrics"][name][metric]
+                cells.append(f'<td class="{"split-start" if i == 0 else ""}">'
+                             f'{score(stats["mean"], stats["std"])}</td>')
+        case_rows.append("<tr>" + "".join(cells) + "</tr>")
+    case_table = '<table id="case-metrics">' + table_header(
+        ["Class"], ["DSC", "Precision", "Recall"]
+    ) + "<tbody>" + "".join(case_rows) + "</tbody></table>"
+
+    lookup = {split: {(row["attribute"], row["class"]): row
+                      for row in values["attribute_metrics"]}
+              for split, values in splits.items()}
+    attribute_groups = []
+    for attribute, classes in ATTRIBUTES.items():
+        rows = []
+        for index, value in enumerate(classes):
+            cells = []
+            if index == 0:
+                cells.append(f'<th rowspan="{len(classes)}" scope="rowgroup" '
+                             f'class="attribute-name">{text(attribute.capitalize())}</th>')
+            cells.append(f'<th scope="row">{value}</th>')
+            for split in splits:
+                row = lookup[split][attribute, value]
+                cells.extend([
+                    f'<td class="split-start">{row["n_nodules"]}</td>',
+                    f'<td>{row["n_missed"]}</td>',
+                    f'<td>{score(row["dsc_mean"], row["dsc_std"])}</td>',
+                ])
+            rows.append("<tr>" + "".join(cells) + "</tr>")
+        attribute_groups.append('<tbody class="attribute-group">' + "".join(rows) + "</tbody>")
+    attribute_table = '<table id="attribute-metrics">' + table_header(
+        ["Attribute", "Level"], ["Total nodules", "Missed", "DSC (mean / sample std)"]
+    ) + "".join(attribute_groups) + "</table>"
+
+    details = []
+    for split, values in splits.items():
+        status = ("PROVISIONAL: components overlap multiple GT nodules; inspect component_warnings.csv."
+                  if values["provisional"] else "No components overlap multiple GT nodules.")
+        missing = [f"{attribute}: {count}" for attribute, count in values["missing_attributes"].items() if count]
+        note = ("<p>Nodules without a usable attribute level (" + text(", ".join(missing)) +
+                "). Excluded only from the corresponding attribute groups; see nodule_metrics.csv.</p>"
+                if missing else "")
+        components = values["components"]
+        details.append(f"<section><h2>{names[split]}</h2>"
+                       f"<p>{values['n_cases']} cases; {values['n_scored_nodules']} scored nodules.</p>"
+                       f"<p>{text(status)}</p>"
+                       f"<p>Unmatched predicted components: {components['unmatched_count']} "
+                       f"({components['unmatched_voxels']} voxels). "
+                       f"Ambiguous components: {components['ambiguous_count']}.</p>{note}</section>")
+    title = " / ".join(names[split] for split in splits) + " evaluation"
+    content = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{text(title)}</title>
+<style>
+body{{font:15px system-ui;max-width:1400px;margin:35px auto;padding:0 20px;color:#222}}
+table{{border-collapse:collapse;width:100%;margin:20px 0;border:3px solid #52677c}}
+td,th{{padding:10px 12px;border:1px solid #d5dde5;text-align:left}}
+thead th{{background:#eaf0f6}}tbody th{{background:#f7f9fb}}
+td{{white-space:nowrap;font-variant-numeric:tabular-nums}}
+.split-start{{border-left:3px solid #8496a8}}
+.attribute-group + .attribute-group tr:first-child > *{{border-top:3px solid #52677c}}
+.attribute-name{{vertical-align:middle;font-weight:700}}
+.table-scroll{{overflow-x:auto}}.split-details{{display:grid;grid-template-columns:repeat({len(splits)},minmax(0,1fr));gap:24px}}
+.split-details section{{background:#f7f9fb;padding:4px 18px;border:1px solid #d5dde5;border-radius:6px}}
+.attribute-plots{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}}
+figure{{margin:0}}figcaption{{text-align:center;font-weight:600}}svg{{width:100%;font:12px system-ui}}
+code{{overflow-wrap:anywhere}}a{{color:#245a89}}
+@media(max-width:700px){{.split-details{{grid-template-columns:1fr}}}}
+</style></head><body>
+<h1>{text(title)}</h1><p>Checkpoint: <code>{text(summary['model_path'])}</code></p>
+<div class="split-details">{''.join(details)}</div>
+<h2>Per-case metrics</h2><div class="table-scroll">{case_table}</div>
+<p>Values are mean &plusmn; sample standard deviation, calculated separately for each set.</p>
+<h2>DSC distributions by attribute level</h2>
+{attribute_boxplots(summary, nodule_rows)}
+<p>Each box spans the 25th to 75th percentiles; the line is the median.
+Whiskers reach the most extreme observations within 1.5 times the interquartile range;
+points beyond them are outliers. N is the number of scored nodules, including missed nodules
+with DSC zero. N/A means no scored nodules. Splits are shown separately.</p>
+<h2>Per-nodule attribute DSC</h2><div class="table-scroll">{attribute_table}</div>
+</body></html>"""
     Path(path).write_text(content, encoding="utf-8")
+
+
+def write_evaluation(output_dir, results):
+    """Write one report and one CSV per category, with explicit split identities."""
+    output_dir = Path(output_dir)
+    summary = {"model_path": next(iter(results.values()))["summary"]["model_path"],
+               "splits": {split: result["summary"] for split, result in results.items()}}
+    for name, fields in (("case_metrics", CASE_FIELDS), ("nodule_metrics", NODULE_FIELDS),
+                         ("component_warnings", COMPONENT_FIELDS)):
+        rows = [row for result in results.values() for row in result[name]]
+        write_csv(output_dir / f"{name}.csv", rows, fields)
+    attributes = [{"split": split, **row} for split, result in results.items()
+                  for row in result["summary"]["attribute_metrics"]]
+    write_csv(output_dir / "attribute_summary.csv", attributes, ATTRIBUTE_FIELDS)
+    (output_dir / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False), encoding="utf-8")
+    render_html(output_dir / "report.html", summary,
+                [row for result in results.values() for row in result["nodule_metrics"]])
+    return summary
 
 
 def evaluate_split(model, cases, classes, split, output_dir, data_config, device,
@@ -207,7 +340,6 @@ def evaluate_split(model, cases, classes, split, output_dir, data_config, device
     from data.transforms import build_transforms
 
     output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=False)
     transform = build_transforms(
         expected_shape=data_config.get("expected_shape", (256, 256, 128)),
         in_min=data_config.get("in_min", 0.0), in_max=data_config.get("in_max", 1.0), classes=classes,
@@ -248,7 +380,7 @@ def evaluate_split(model, cases, classes, split, output_dir, data_config, device
             warnings.warn(f"{split}/{case['case_id']}: {len(issues)} nodules have annotation/grid "
                           "issues; see nodule_metrics.csv.", stacklevel=2)
         if save_masks:
-            mask_dir = output_dir / "masks" / case["dataset"]
+            mask_dir = output_dir / "masks" / split / case["dataset"]
             mask_dir.mkdir(parents=True, exist_ok=True)
             for suffix, mask in (("prediction", prediction), ("assigned_nodules", assigned)):
                 header = instance_image.header.copy()
@@ -285,13 +417,8 @@ def evaluate_split(model, cases, classes, split, output_dir, data_config, device
         },
         "cases": cases,
     }
-    write_csv(output_dir / "case_metrics.csv", all_cases, CASE_FIELDS)
-    write_csv(output_dir / "nodule_metrics.csv", all_nodules, NODULE_FIELDS)
-    write_csv(output_dir / "attribute_summary.csv", attributes, ATTRIBUTE_FIELDS)
-    write_csv(output_dir / "component_warnings.csv", all_components, COMPONENT_FIELDS)
-    (output_dir / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False), encoding="utf-8")
-    render_html(output_dir / "report.html", summary, attributes)
-    return summary
+    return {"summary": summary, "case_metrics": all_cases, "nodule_metrics": all_nodules,
+            "component_warnings": all_components}
 
 
 def main(argv=None):
@@ -346,13 +473,16 @@ def main(argv=None):
                   "split_path": str(split_path), "data_root": str(root),
                   "annotations_root": str(annotations), "created_utc": timestamp,
                   "training_data_config": training["data"], "requested_set": args.evaluation_set}
-    for split, folder in (("val", "validation"), ("test", "test")):
-        if split not in selected_splits:
-            continue
-        summary = evaluate_split(model, cases[split], classes, split, output / folder,
-                                 training["data"], device, precision, provenance, args.save_masks)
-        print(f"{folder}: {summary['n_cases']} cases, {summary['n_scored_nodules']} scored nodules; "
-              f"report: {output / folder / 'report.html'}", flush=True)
+    results = {}
+    for split in selected_splits:
+        results[split] = evaluate_split(model, cases[split], classes, split, output,
+                                       training["data"], device, precision, provenance, args.save_masks)
+        summary = results[split]["summary"]
+        # Save completed splits together, retaining their results if a later split fails.
+        write_evaluation(output, results)
+        print(f"{split}: {summary['n_cases']} cases, {summary['n_scored_nodules']} scored nodules; "
+              f"report: {output / 'report.html'}", flush=True)
+
 
 
 if __name__ == "__main__":

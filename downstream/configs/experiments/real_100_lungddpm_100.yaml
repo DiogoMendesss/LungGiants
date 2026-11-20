@@ -1,0 +1,6 @@
+name: real_100_lungddpm_100
+
+data:
+  real_percent: 100
+  synthetic_percent: 100
+  synthetic_dataset: lungddpm

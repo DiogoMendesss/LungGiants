@@ -1,0 +1,17 @@
+{"time":"2026-11-05T17:46:59.364802838Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmplnsfj9mr/port-363727.txt","pid":363727,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-11-05T17:46:59.369174702Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":363727}
+{"time":"2026-11-05T17:46:59.369088859Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-363727-363937-2433803037/socket","Net":"unix"}}
+{"time":"2026-11-05T17:46:59.377189746Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-11-05T17:46:59.682879157Z","level":"INFO","msg":"handleInformInit: received","streamId":"owr9d5lo","id":"1(@)"}
+{"time":"2026-11-05T17:46:59.705803229Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"owr9d5lo","id":"1(@)"}
+{"time":"2026-11-05T17:47:08.648818094Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"saimmb576foo"}
+{"time":"2026-11-05T18:57:15.951668812Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: context deadline exceeded"}
+{"time":"2026-11-06T02:50:00.370101912Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-11-06T02:50:00.370478236Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-11-06T02:50:00.370448358Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-11-06T02:50:00.370466122Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-11-06T02:50:00.370605955Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-11-06T02:50:00.370660322Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-363727-363937-2433803037/socket","Net":"unix"}}
+{"time":"2026-11-06T02:50:01.940699041Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-11-06T02:50:02.125623874Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-11-06T02:50:02.125660001Z","level":"INFO","msg":"server: all connections closed"}

@@ -221,3 +221,29 @@ def test_mixed_nifti_batch_loads(cohort, classes, name):
     assert batch["source"] == ["real", "synthetic"]
     assert tuple(batch["image"].shape) == (2, 1, 4, 4, 4)
     assert set(batch["label"].unique().tolist()) == ({0, 1} if classes == "nodule" else {0, 1, 2})
+
+
+@pytest.mark.parametrize("classes", ["nodule", "lung+nodule"])
+@pytest.mark.parametrize("repeat_percent", [50, 100])
+def test_real_repeat_preserves_inputs_and_excludes_held_out(cohort, classes, repeat_percent):
+    _, config, index, build = cohort
+    baseline = build(100, 0, None, classes=classes)
+    # The real alias requires no synthetic dataset configuration.
+    config.pop("synthetic")
+    train, val, test = build(100, repeat_percent, "real", classes=classes)
+    count = len(baseline[0])
+    assert train[:count] == baseline[0]
+    repeated = train[count:]
+    assert len(repeated) == count * repeat_percent // 100
+    originals = {case["patient_id"]: case for case in baseline[0]}
+    for case in repeated:
+        assert case == {
+            **originals[case["patient_id"]],
+            "sample_id": f"real_repeat/{case['patient_id']}",
+        }
+    assert ids(train) == ids(index["train"])
+    assert not ids(train) & (ids(val) | ids(test))
+    assert len({case["sample_id"] for case in train}) == len(train)
+    assert all(case["source"] == "real" for case in train)
+    assert (val, test) == baseline[1:]
+    assert (train, val, test) == build(100, repeat_percent, "real", classes=classes)

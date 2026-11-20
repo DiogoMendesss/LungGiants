@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/evaluate.py", line 359, in <module>
+    main()
+  File "/nas-ctm01/homes/djmendes/LungGiants/downstream/evaluate.py", line 316, in main
+    raise FileNotFoundError(model_path)
+FileNotFoundError: /runs_lung+nodule/real_100/20261020_190006_782295/checkpoints/epoch=035-nodule_dice=0.4985.ckpt

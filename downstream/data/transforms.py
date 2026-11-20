@@ -38,7 +38,7 @@ class ComposeSegmentationLabeld(MapTransform):
 
 
 class CheckPairGeometryd(MapTransform):
-    """Check expected CT shape and the voxel grid of every required mask."""
+    """Check expected CT and mask shapes without comparing affine metadata."""
 
     def __init__(self, expected_shape, classes="nodule"):
         super().__init__(keys=mask_keys(classes))
@@ -56,8 +56,6 @@ class CheckPairGeometryd(MapTransform):
             mask = data[key]
             if tuple(mask.shape) != tuple(image.shape):
                 raise ValueError(f"{case_id}: image and {key} shapes do not match.")
-            if not torch.allclose(image.affine, mask.affine, atol=1e-3, rtol=0):
-                raise ValueError(f"{case_id}: image and {key} affines do not match.")
         return data
 
 

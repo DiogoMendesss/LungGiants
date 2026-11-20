@@ -33,7 +33,7 @@ one NIfTI per case directly inside it, with matching filename stems. Patient IDs
 are filename stems such as `LIDC-IDRI-0001` and `LNDb-0001`, without a folder prefix.
 Nodule mode does not inspect or require the TS folder.
 
-`data/transforms.py` checks CT/mask shapes and affines, then constructs the target
+`data/transforms.py` checks CT/mask shapes, then constructs the target
 at loading time. In joint mode, TS labels 28, 29, 30, 31, and 32 become lung;
 positive nodule instance IDs become class 2 last, overriding lung. Nodules outside
 the TS lung region are retained. All other TS labels become background. The
@@ -59,7 +59,7 @@ data:
 
 With exactly these bounds, loading validates that every image voxel is finite
 and in the inclusive range [0, 1], without clipping or rescaling. Out-of-range
-values, NaN, and infinity raise an error identifying the case. Shape and affine
+values, NaN, and infinity raise an error identifying the case. Shape
 checks and segmentation-label construction still run.
 
 For inputs that need normalization, set `in_min` and `in_max` to their intensity
@@ -110,8 +110,9 @@ LungDDPM uses the original real conditioning masks; LAND and MAISI CT use the
 generator-specific mask paths supplied in the dataset config. Mask folder
 settings accept either one path or a list, rejecting duplicate case IDs across
 folders. Nodule mode needs only `nod_masks`; joint mode also needs `ts_masks`.
-All selected masks must match the CT shape and affine at loading time; this
-pipeline checks alignment but does not resample masks.
+CTs must match `expected_shape`, and all required masks must match the CT shape.
+Affine metadata is not compared. Volumes are not resampled; image and mask
+arrays are used as stored and are expected to align by voxel index.
 
 Example commands, run from `downstream`:
 
@@ -301,12 +302,23 @@ to the saved training setting and CPU uses float32. `--save-masks` additionally
 writes semantic predictions and assigned nodule-instance predictions as NIfTI.
 
 Reports default to a new timestamped directory under the run's `evaluation/`.
-Existing output directories are not overwritten. Separate `validation/` and
-`test/` folders each contain:
+Existing output directories are not overwritten. Both sets share the following
+files directly inside the output directory. Every CSV has a `split` column
+(`val` or `test`), and `summary.json` keeps separate summaries under `splits.val`
+and `splits.test`. The HTML tables compare validation and test side by side;
+attribute names span their class rows, with thick separators between attributes.
+Metrics are computed independently for each set. With `--set val` or `--set test`,
+the same files contain only the selected set. Optional NIfTI predictions are
+stored under `masks/<split>/<dataset>/`.
+
+Completed splits are saved as evaluation progresses, so validation results remain
+available if test evaluation fails. Check the split headings to confirm which
+sets completed.
+
 
 | File | Contents |
 | --- | --- |
-| `report.html` | Readable mean ± sample standard deviation tables and counts |
+| `report.html` | Readable mean Â± sample standard deviation tables and counts |
 | `case_metrics.csv` | Lung and nodule DSC, precision, recall for every case |
 | `nodule_metrics.csv` | Individual nodule DSC, attributes, voxel counts, and status |
 | `attribute_summary.csv` | All 3 size, 5 sphericity, and 5 spiculation classes |
@@ -334,7 +346,7 @@ label `X` for LNDb. Annotation labels absent after preprocessing are reported as
 annotation are still scored, with unavailable attributes and a diagnostic.
 Do not substitute binary masks for the original instance-labelled NIfTI masks.
 
-Size uses the stored `equiv_diameter_mm` class (1–3). Shape classes use
+Size uses the stored `equiv_diameter_mm` class (1â€“3). Shape classes use
 `ceil(median(valid reader ratings))`, accepting values in [1,5], including
 fractional LNDb values such as 1.5 and 2.5; missing or
 invalid values are recorded explicitly. Each attribute mean weights scored

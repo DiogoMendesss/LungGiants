@@ -1,0 +1,6 @@
+name: real_100_maisi_ct_100
+
+data:
+  real_percent: 100
+  synthetic_percent: 100
+  synthetic_dataset: maisi_ct

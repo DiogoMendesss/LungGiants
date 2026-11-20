@@ -1,0 +1,6 @@
+/nas-ctm01/homes/djmendes/LungGiants/downstream/evaluate.py:352: UserWarning: test/LIDC-IDRI-0717: 1 nodules have annotation/grid issues; see nodule_metrics.csv.
+  summary = evaluate_split(model, cases[split], classes, split, output / folder,
+/nas-ctm01/homes/djmendes/LungGiants/downstream/evaluate.py:352: UserWarning: test/LNDb-0020: 2 nodules have annotation/grid issues; see nodule_metrics.csv.
+  summary = evaluate_split(model, cases[split], classes, split, output / folder,
+/nas-ctm01/homes/djmendes/LungGiants/downstream/evaluate.py:352: UserWarning: test/LNDb-0188: 1 nodules have annotation/grid issues; see nodule_metrics.csv.
+  summary = evaluate_split(model, cases[split], classes, split, output / folder,

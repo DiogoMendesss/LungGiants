@@ -133,7 +133,7 @@ def build_experiment_data(
         raise ValueError(
             "Set synthetic_dataset to null for a real-only experiment."
         )
-    if synthetic_percent > 0 and name not in datasets.get("synthetic", {}):
+    if synthetic_percent > 0 and name != "real" and name not in datasets.get("synthetic", {}):
         raise ValueError(f"Choose a configured synthetic_dataset, got {name!r}.")
 
     index = build_real_index(datasets_config, split_path, classes=classes)
@@ -146,7 +146,15 @@ def build_experiment_data(
     )
 
     synthetic_cases = []
-    if synthetic_percent > 0:
+    if synthetic_percent > 0 and name == "real":
+        # Repeat real training inputs without indexing generated data or held-out cases.
+        synthetic_cases = [
+            {**real_record(case), "sample_id": f"real_repeat/{case['patient_id']}"}
+            for case in select_real_cases(
+                index["train"], synthetic_percent, datasets["split"]["seed"],
+            )
+        ]
+    elif synthetic_percent > 0:
         synthetic_settings = datasets["synthetic"][name]
         if not isinstance(synthetic_settings.get("conditioned_on_real"), bool):
             raise ValueError(f"{name}: conditioned_on_real must be true or false.")

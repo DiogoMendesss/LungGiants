@@ -1,0 +1,24 @@
+Experiment: real_50_lungddpm_50
+Classes: lung+nodule
+Training cases: 932
+  real: 466
+  synthetic: 466
+Validation cases: 104
+┏━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name             ┃ Type              ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ network          │ SegResNet         │  4.7 M │ train │     0 │
+│ 1 │ dice_loss        │ DiceLoss          │      0 │ train │     0 │
+│ 2 │ entropy_loss     │ CrossEntropyLoss  │      0 │ train │     0 │
+│ 3 │ nodule_dice_loss │ DiceLoss          │      0 │ train │     0 │
+│ 4 │ nodule_bce_loss  │ BCEWithLogitsLoss │      0 │ train │     0 │
+└───┴──────────────────┴───────────────────┴────────┴───────┴───────┘
+Trainable params: 4.7 M                                                         
+Non-trainable params: 0                                                         
+Total params: 4.7 M                                                             
+Total estimated model params size (MB): 18.804                                  
+Modules in train mode: 141                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+Sanity Checking: |          | 0/? [00:00<?, ?it/s]Sanity Checking: |          | 0/? [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:00<00:00,  3.01it/s]                                                                           Training: |          | 0/? [00:00<?, ?it/s]Training: |          | 0/? [00:00<?, ?it/s]Epoch 0:   0%|          | 0/932 [00:00<?, ?it/s][1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mreal_50_lungddpm_50_lung+nodule_20261103_170445_871312[0m at: [34mhttps://wandb.ai/diogo-j-mendes-inesc-tec/LungGiants/runs/vt9iyzzt[0m

@@ -1,0 +1,18 @@
+{"time":"2026-11-10T21:56:13.351624956Z","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpij4hi2do/port-3378858.txt","pid":3378858,"detached":false,"idle-timeout":600000000000,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2026-11-10T21:56:13.35233414Z","level":"INFO","msg":"server: will exit if parent process dies","ppid":3378858}
+{"time":"2026-11-10T21:56:13.352320705Z","level":"INFO","msg":"server: accepting connections","addr":{"Name":"/tmp/wandb-3378858-3379068-1263413327/socket","Net":"unix"}}
+{"time":"2026-11-10T21:56:13.533861104Z","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(@)"}
+{"time":"2026-11-10T21:56:13.801013067Z","level":"INFO","msg":"handleInformInit: received","streamId":"itudz8uj","id":"1(@)"}
+{"time":"2026-11-10T21:56:13.816637348Z","level":"INFO","msg":"handleInformInit: stream started","streamId":"itudz8uj","id":"1(@)"}
+{"time":"2026-11-10T21:56:20.013604293Z","level":"INFO","msg":"connection: cancelling request","id":"1(@)","requestId":"ckalcbmr5twt"}
+{"time":"2026-11-11T07:26:18.54598331Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: Post \"https://api.wandb.ai/sdk/otel/v1/metrics\": context deadline exceeded"}
+{"time":"2026-11-11T07:26:18.80348977Z","level":"ERROR","msg":"analytics: failed to send telemetry to backend proxy","error":"failed to upload metrics: reader collect and export timeout: retry-able request failure: body: too many concurrent telemetry requests"}
+{"time":"2026-11-11T08:40:54.180541783Z","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"1(@)"}
+{"time":"2026-11-11T08:40:54.180973825Z","level":"INFO","msg":"server: is shutting down"}
+{"time":"2026-11-11T08:40:54.181070405Z","level":"INFO","msg":"processOutgoingData: finished","id":"1(@)"}
+{"time":"2026-11-11T08:40:54.181186712Z","level":"INFO","msg":"connection: closing","id":"1(@)"}
+{"time":"2026-11-11T08:40:54.18127569Z","level":"INFO","msg":"connection: closed successfully","id":"1(@)"}
+{"time":"2026-11-11T08:40:54.18137501Z","level":"INFO","msg":"server: listener closed","addr":{"Name":"/tmp/wandb-3378858-3379068-1263413327/socket","Net":"unix"}}
+{"time":"2026-11-11T08:40:55.846059629Z","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"1(@)"}
+{"time":"2026-11-11T08:40:55.964109312Z","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"1(@)"}
+{"time":"2026-11-11T08:40:55.964179401Z","level":"INFO","msg":"server: all connections closed"}

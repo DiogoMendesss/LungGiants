@@ -1,0 +1,216 @@
+{
+  "split_path": "Z:\\nas-ctm01\\homes\\djmendes\\LungGiants\\downstream\\runs_lung+nodule\\real_100\\20261020_190006_782295\\configs\\real_split.json",
+  "cases": 159,
+  "annotations": 461,
+  "counts_by_split_dataset": {
+    "val/LIDC_IDRI": {
+      "exact_expected": 246
+    },
+    "val/LNDb": {
+      "exact_expected": 48,
+      "exact_other_label": 11
+    },
+    "test/LIDC_IDRI": {
+      "exact_expected": 111
+    },
+    "test/LNDb": {
+      "exact_expected": 44,
+      "exact_other_label": 1
+    }
+  },
+  "exceptions": [
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0044",
+      "annotation": "LNDb-0044_nodule5.npz",
+      "expected_label": 5,
+      "matched_label": 3,
+      "annotation_voxels": 81,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "3": 81
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0252",
+      "annotation": "LNDb-0252_nodule5.npz",
+      "expected_label": 5,
+      "matched_label": 2,
+      "annotation_voxels": 70,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "2": 70
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0252",
+      "annotation": "LNDb-0252_nodule6.npz",
+      "expected_label": 6,
+      "matched_label": 3,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "3": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0272",
+      "annotation": "LNDb-0272_nodule4.npz",
+      "expected_label": 4,
+      "matched_label": 3,
+      "annotation_voxels": 9,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "3": 9
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule10.npz",
+      "expected_label": 10,
+      "matched_label": 7,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "7": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule12.npz",
+      "expected_label": 12,
+      "matched_label": 9,
+      "annotation_voxels": 17,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "9": 17
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule5.npz",
+      "expected_label": 5,
+      "matched_label": 2,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "2": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule6.npz",
+      "expected_label": 6,
+      "matched_label": 3,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "3": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule7.npz",
+      "expected_label": 7,
+      "matched_label": 4,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "4": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule8.npz",
+      "expected_label": 8,
+      "matched_label": 5,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "5": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "val",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0280",
+      "annotation": "LNDb-0280_nodule9.npz",
+      "expected_label": 9,
+      "matched_label": 6,
+      "annotation_voxels": 21,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "6": 21
+      },
+      "error": ""
+    },
+    {
+      "split": "test",
+      "dataset": "LNDb",
+      "case_id": "LNDb-0020",
+      "annotation": "LNDb-0020_nodule2.npz",
+      "expected_label": 2,
+      "matched_label": 1,
+      "annotation_voxels": 83,
+      "expected_label_dsc": 0.0,
+      "best_label_dsc": 1.0,
+      "status": "exact_other_label",
+      "overlaps": {
+        "1": 83
+      },
+      "error": ""
+    }
+  ],
+  "case_issues": []
+}

@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>test segmentation evaluation</title>
+<style>body{font:15px system-ui;max-width:1200px;margin:35px auto;padding:0 20px;color:#222}
+table{border-collapse:collapse;width:100%;margin:20px 0}td,th{padding:9px;border:1px solid #ddd;text-align:left}
+th{background:#eef3f7}code{overflow-wrap:anywhere}</style>
+<h1>test evaluation</h1><p>Checkpoint: <code>/nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100/20261020_190006_782295/checkpoints/epoch=035-nodule_dice=0.4985.ckpt</code></p>
+<p>No components overlap multiple GT nodules.</p><h2>Per-case metrics (55 cases)</h2>
+<table><thead><tr><th>Class</th><th>DSC</th><th>Precision</th><th>Recall</th></tr></thead><tbody><tr><td>Lung</td><td>0.9856 ± 0.0054</td><td>0.9867 ± 0.0053</td><td>0.9847 ± 0.0070</td></tr><tr><td>Nodule</td><td>0.4604 ± 0.3320</td><td>0.5237 ± 0.3641</td><td>0.4461 ± 0.3455</td></tr></tbody></table>
+<p>Values are mean ± sample standard deviation.</p>
+<h2>Per-nodule attribute DSC</h2>
+<table><thead><tr><th>Attribute</th><th>Class</th><th>Total nodules</th><th>Missed</th><th>Mean ± sample std</th></tr></thead><tbody><tr><td>size</td><td>1</td><td>118</td><td>67</td><td>0.2652 ± 0.3324</td></tr><tr><td>size</td><td>2</td><td>28</td><td>5</td><td>0.6270 ± 0.3196</td></tr><tr><td>size</td><td>3</td><td>10</td><td>0</td><td>0.8445 ± 0.0550</td></tr><tr><td>sphericity</td><td>1</td><td>2</td><td>2</td><td>0.0000 ± 0.0000</td></tr><tr><td>sphericity</td><td>2</td><td>13</td><td>8</td><td>0.2302 ± 0.3107</td></tr><tr><td>sphericity</td><td>3</td><td>36</td><td>19</td><td>0.3387 ± 0.3763</td></tr><tr><td>sphericity</td><td>4</td><td>57</td><td>24</td><td>0.3831 ± 0.3603</td></tr><tr><td>sphericity</td><td>5</td><td>48</td><td>19</td><td>0.4316 ± 0.3872</td></tr><tr><td>spiculation</td><td>1</td><td>115</td><td>57</td><td>0.3326 ± 0.3561</td></tr><tr><td>spiculation</td><td>2</td><td>28</td><td>10</td><td>0.4887 ± 0.3926</td></tr><tr><td>spiculation</td><td>3</td><td>9</td><td>4</td><td>0.3753 ± 0.4112</td></tr><tr><td>spiculation</td><td>4</td><td>2</td><td>1</td><td>0.3631 ± 0.5135</td></tr><tr><td>spiculation</td><td>5</td><td>2</td><td>0</td><td>0.8291 ± 0.0071</td></tr></tbody></table>
+<p>Unmatched predicted components: 42
+(474 voxels). Ambiguous components:
+0.</p>
+<p>Nodules without a usable attribute class (size: 1, sphericity: 1, spiculation: 1). These nodules are excluded only from the corresponding attribute groups; see nodule_metrics.csv for details.</p>
+<p>All per-case metrics use the full prediction. Attribute DSC excludes unmatched and ambiguous
+components, retains missed nodules as zero, and averages individual nodule scores equally.
+Nodules absent from the evaluation grid are counted but not scored. Empty-GT case metrics are
+unavailable and excluded. Lung is class 1, excluding nodules, and is unavailable for nodule-only models.
+Standard deviation uses ddof=1; it is unavailable for fewer than two observations.</p>
+<p><a href="case_metrics.csv">Per-case CSV</a> · <a href="nodule_metrics.csv">Per-nodule CSV</a> ·
+<a href="attribute_summary.csv">Attribute summaries</a> ·
+<a href="component_warnings.csv">Discarded components</a> · <a href="summary.json">Full metadata</a></p>
+</html>

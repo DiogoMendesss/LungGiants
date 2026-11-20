@@ -1,0 +1,1200 @@
+{
+  "model_path": "/nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100/20261020_190006_782295/checkpoints/epoch=035-nodule_dice=0.4985.ckpt",
+  "config_dir": "/nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100/20261020_190006_782295/configs",
+  "split_path": "/nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100/20261020_190006_782295/configs/real_split.json",
+  "data_root": "/nas-ctm01/datasets/public/LungNodule-nifti",
+  "annotations_root": "/nas-ctm01/datasets/public/Lung_Nodule",
+  "created_utc": "20261105T153338_524663Z",
+  "training_data_config": {
+    "batch_size": 1,
+    "eval_batch_size": 1,
+    "num_workers": 8,
+    "pin_memory": false,
+    "sharing_strategy": "file_system",
+    "prefetch_factor": 1,
+    "expected_shape": [
+      256,
+      256,
+      128
+    ],
+    "hu_min": -1000,
+    "hu_max": 1000
+  },
+  "requested_set": "both",
+  "split": "val",
+  "classes": "lung+nodule",
+  "device": "cuda",
+  "precision": "16-mixed",
+  "provisional": true,
+  "n_cases": 104,
+  "n_nodules": 308,
+  "n_scored_nodules": 298,
+  "n_missing_from_grid": 10,
+  "case_metrics": {
+    "lung": {
+      "n_cases": 104,
+      "n_empty_gt": 0,
+      "n_unavailable": 0,
+      "dsc": {
+        "n": 104,
+        "mean": 0.984867487580016,
+        "std": 0.006519946458745213
+      },
+      "precision": {
+        "n": 104,
+        "mean": 0.9864157808530536,
+        "std": 0.004952708098417879
+      },
+      "recall": {
+        "n": 104,
+        "mean": 0.9833838665516148,
+        "std": 0.01075851262440697
+      }
+    },
+    "nodule": {
+      "n_cases": 104,
+      "n_empty_gt": 6,
+      "n_unavailable": 0,
+      "dsc": {
+        "n": 98,
+        "mean": 0.4984379668160849,
+        "std": 0.2850088044643953
+      },
+      "precision": {
+        "n": 98,
+        "mean": 0.5767763001919352,
+        "std": 0.32406013710967013
+      },
+      "recall": {
+        "n": 98,
+        "mean": 0.5180321947544487,
+        "std": 0.32363680890058755
+      }
+    }
+  },
+  "attribute_metrics": [
+    {
+      "attribute": "size",
+      "class": 1,
+      "n_nodules": 221,
+      "n_scored": 211,
+      "n_cases": 82,
+      "n_missing_from_grid": 10,
+      "n_missed": 102,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.33817174294208635,
+      "dsc_std": 0.357672961257684
+    },
+    {
+      "attribute": "size",
+      "class": 2,
+      "n_nodules": 68,
+      "n_scored": 68,
+      "n_cases": 39,
+      "n_missing_from_grid": 0,
+      "n_missed": 13,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.6034340289376582,
+      "dsc_std": 0.34531783037726255
+    },
+    {
+      "attribute": "size",
+      "class": 3,
+      "n_nodules": 16,
+      "n_scored": 16,
+      "n_cases": 15,
+      "n_missing_from_grid": 0,
+      "n_missed": 3,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.5929661812692675,
+      "dsc_std": 0.35157299761239297
+    },
+    {
+      "attribute": "sphericity",
+      "class": 1,
+      "n_nodules": 3,
+      "n_scored": 3,
+      "n_cases": 3,
+      "n_missing_from_grid": 0,
+      "n_missed": 2,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.23391812865497075,
+      "dsc_std": 0.40515808364184264
+    },
+    {
+      "attribute": "sphericity",
+      "class": 2,
+      "n_nodules": 28,
+      "n_scored": 28,
+      "n_cases": 21,
+      "n_missing_from_grid": 0,
+      "n_missed": 15,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.3173905050689057,
+      "dsc_std": 0.37073744553648874
+    },
+    {
+      "attribute": "sphericity",
+      "class": 3,
+      "n_nodules": 71,
+      "n_scored": 69,
+      "n_cases": 45,
+      "n_missing_from_grid": 2,
+      "n_missed": 26,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.4230251629892276,
+      "dsc_std": 0.3607097100948884
+    },
+    {
+      "attribute": "sphericity",
+      "class": 4,
+      "n_nodules": 114,
+      "n_scored": 110,
+      "n_cases": 67,
+      "n_missing_from_grid": 4,
+      "n_missed": 41,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.43171171368256245,
+      "dsc_std": 0.3696261341888751
+    },
+    {
+      "attribute": "sphericity",
+      "class": 5,
+      "n_nodules": 89,
+      "n_scored": 85,
+      "n_cases": 44,
+      "n_missing_from_grid": 4,
+      "n_missed": 34,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.4189352629366637,
+      "dsc_std": 0.38875401607500143
+    },
+    {
+      "attribute": "spiculation",
+      "class": 1,
+      "n_nodules": 209,
+      "n_scored": 200,
+      "n_cases": 84,
+      "n_missing_from_grid": 9,
+      "n_missed": 90,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.38009485072087706,
+      "dsc_std": 0.3719972960696601
+    },
+    {
+      "attribute": "spiculation",
+      "class": 2,
+      "n_nodules": 67,
+      "n_scored": 66,
+      "n_cases": 36,
+      "n_missing_from_grid": 1,
+      "n_missed": 19,
+      "n_ambiguous": 1,
+      "dsc_mean": 0.49914174974886594,
+      "dsc_std": 0.3767958318275969
+    },
+    {
+      "attribute": "spiculation",
+      "class": 3,
+      "n_nodules": 16,
+      "n_scored": 16,
+      "n_cases": 13,
+      "n_missing_from_grid": 0,
+      "n_missed": 4,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.4910439308885881,
+      "dsc_std": 0.33222212373793086
+    },
+    {
+      "attribute": "spiculation",
+      "class": 4,
+      "n_nodules": 7,
+      "n_scored": 7,
+      "n_cases": 5,
+      "n_missing_from_grid": 0,
+      "n_missed": 4,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.2603060395172734,
+      "dsc_std": 0.3372000966718083
+    },
+    {
+      "attribute": "spiculation",
+      "class": 5,
+      "n_nodules": 6,
+      "n_scored": 6,
+      "n_cases": 6,
+      "n_missing_from_grid": 0,
+      "n_missed": 1,
+      "n_ambiguous": 0,
+      "dsc_mean": 0.5390066384017281,
+      "dsc_std": 0.3762921135084926
+    }
+  ],
+  "missing_attributes": {
+    "size": 3,
+    "sphericity": 3,
+    "spiculation": 3
+  },
+  "components": {
+    "unmatched_count": 109,
+    "unmatched_voxels": 2328,
+    "ambiguous_count": 1,
+    "ambiguous_voxels": 129
+  },
+  "conventions": {
+    "connectivity": 26,
+    "std_ddof": 1,
+    "empty_gt_case_metrics": "excluded",
+    "missed_nodule_dsc": 0,
+    "missing_grid_nodule_dsc": null,
+    "prediction_rule": "argmax",
+    "lung": "class 1 excludes nodule voxels; unavailable in nodule-only models",
+    "size": "equiv_diameter_mm stores the size class 1..3",
+    "shape_attributes": "ceil(median(finite ratings in [1,5], including fractional LNDb values))",
+    "attribute_averaging": "equal weight per scored nodule, including missed nodules",
+    "ambiguous_components": "discarded; affected scores and summaries are provisional",
+    "unmatched_components": "excluded only from per-nodule DSC",
+    "label_mapping": {
+      "LIDC_IDRI": "filename X + 1",
+      "LNDb": "filename X"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "LIDC-IDRI-0011",
+      "patient_id": "LIDC-IDRI-0011",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0011.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0011.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0011.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0015",
+      "patient_id": "LIDC-IDRI-0015",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0015.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0015.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0015.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0019",
+      "patient_id": "LIDC-IDRI-0019",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0019.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0019.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0019.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0026",
+      "patient_id": "LIDC-IDRI-0026",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0026.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0026.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0026.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0033",
+      "patient_id": "LIDC-IDRI-0033",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0033.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0033.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0033.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0040",
+      "patient_id": "LIDC-IDRI-0040",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0040.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0040.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0040.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0054",
+      "patient_id": "LIDC-IDRI-0054",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0054.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0054.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0054.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0072",
+      "patient_id": "LIDC-IDRI-0072",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0072.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0072.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0072.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0082",
+      "patient_id": "LIDC-IDRI-0082",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0082.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0082.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0082.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0088",
+      "patient_id": "LIDC-IDRI-0088",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0088.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0088.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0088.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0098",
+      "patient_id": "LIDC-IDRI-0098",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0098.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0098.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0098.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0103",
+      "patient_id": "LIDC-IDRI-0103",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0103.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0103.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0103.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0164",
+      "patient_id": "LIDC-IDRI-0164",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0164.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0164.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0164.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0166",
+      "patient_id": "LIDC-IDRI-0166",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0166.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0166.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0166.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0191",
+      "patient_id": "LIDC-IDRI-0191",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0191.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0191.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0191.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0195",
+      "patient_id": "LIDC-IDRI-0195",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0195.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0195.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0195.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0204",
+      "patient_id": "LIDC-IDRI-0204",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0204.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0204.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0204.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0220",
+      "patient_id": "LIDC-IDRI-0220",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0220.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0220.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0220.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0222",
+      "patient_id": "LIDC-IDRI-0222",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0222.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0222.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0222.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0237",
+      "patient_id": "LIDC-IDRI-0237",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0237.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0237.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0237.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0240",
+      "patient_id": "LIDC-IDRI-0240",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0240.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0240.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0240.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0255",
+      "patient_id": "LIDC-IDRI-0255",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0255.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0255.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0255.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0260",
+      "patient_id": "LIDC-IDRI-0260",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0260.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0260.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0260.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0268",
+      "patient_id": "LIDC-IDRI-0268",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0268.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0268.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0268.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0276",
+      "patient_id": "LIDC-IDRI-0276",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0276.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0276.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0276.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0282",
+      "patient_id": "LIDC-IDRI-0282",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0282.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0282.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0282.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0289",
+      "patient_id": "LIDC-IDRI-0289",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0289.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0289.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0289.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0302",
+      "patient_id": "LIDC-IDRI-0302",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0302.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0302.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0302.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0344",
+      "patient_id": "LIDC-IDRI-0344",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0344.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0344.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0344.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0384",
+      "patient_id": "LIDC-IDRI-0384",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0384.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0384.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0384.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0395",
+      "patient_id": "LIDC-IDRI-0395",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0395.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0395.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0395.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0424",
+      "patient_id": "LIDC-IDRI-0424",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0424.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0424.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0424.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0426",
+      "patient_id": "LIDC-IDRI-0426",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0426.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0426.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0426.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0429",
+      "patient_id": "LIDC-IDRI-0429",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0429.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0429.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0429.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0439",
+      "patient_id": "LIDC-IDRI-0439",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0439.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0439.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0439.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0458",
+      "patient_id": "LIDC-IDRI-0458",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0458.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0458.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0458.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0464",
+      "patient_id": "LIDC-IDRI-0464",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0464.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0464.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0464.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0467",
+      "patient_id": "LIDC-IDRI-0467",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0467.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0467.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0467.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0469",
+      "patient_id": "LIDC-IDRI-0469",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0469.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0469.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0469.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0476",
+      "patient_id": "LIDC-IDRI-0476",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0476.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0476.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0476.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0478",
+      "patient_id": "LIDC-IDRI-0478",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0478.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0478.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0478.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0486",
+      "patient_id": "LIDC-IDRI-0486",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0486.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0486.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0486.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0491",
+      "patient_id": "LIDC-IDRI-0491",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0491.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0491.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0491.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0496",
+      "patient_id": "LIDC-IDRI-0496",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0496.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0496.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0496.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0498",
+      "patient_id": "LIDC-IDRI-0498",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0498.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0498.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0498.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0501",
+      "patient_id": "LIDC-IDRI-0501",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0501.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0501.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0501.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0527",
+      "patient_id": "LIDC-IDRI-0527",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0527.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0527.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0527.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0542",
+      "patient_id": "LIDC-IDRI-0542",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0542.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0542.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0542.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0547",
+      "patient_id": "LIDC-IDRI-0547",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0547.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0547.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0547.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0558",
+      "patient_id": "LIDC-IDRI-0558",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0558.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0558.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0558.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0570",
+      "patient_id": "LIDC-IDRI-0570",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0570.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0570.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0570.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0593",
+      "patient_id": "LIDC-IDRI-0593",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0593.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0593.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0593.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0615",
+      "patient_id": "LIDC-IDRI-0615",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0615.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0615.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0615.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0620",
+      "patient_id": "LIDC-IDRI-0620",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0620.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0620.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0620.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0626",
+      "patient_id": "LIDC-IDRI-0626",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0626.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0626.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0626.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0630",
+      "patient_id": "LIDC-IDRI-0630",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0630.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0630.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0630.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0633",
+      "patient_id": "LIDC-IDRI-0633",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0633.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0633.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0633.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0657",
+      "patient_id": "LIDC-IDRI-0657",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0657.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0657.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0657.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0660",
+      "patient_id": "LIDC-IDRI-0660",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0660.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0660.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0660.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0721",
+      "patient_id": "LIDC-IDRI-0721",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0721.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0721.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0721.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0732",
+      "patient_id": "LIDC-IDRI-0732",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0732.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0732.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0732.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0768",
+      "patient_id": "LIDC-IDRI-0768",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0768.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0768.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0768.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0773",
+      "patient_id": "LIDC-IDRI-0773",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0773.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0773.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0773.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0776",
+      "patient_id": "LIDC-IDRI-0776",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0776.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0776.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0776.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0787",
+      "patient_id": "LIDC-IDRI-0787",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0787.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0787.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0787.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0803",
+      "patient_id": "LIDC-IDRI-0803",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0803.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0803.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0803.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0814",
+      "patient_id": "LIDC-IDRI-0814",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0814.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0814.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0814.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0815",
+      "patient_id": "LIDC-IDRI-0815",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0815.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0815.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0815.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0840",
+      "patient_id": "LIDC-IDRI-0840",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0840.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0840.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0840.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0846",
+      "patient_id": "LIDC-IDRI-0846",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0846.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0846.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0846.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0855",
+      "patient_id": "LIDC-IDRI-0855",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0855.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0855.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0855.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0859",
+      "patient_id": "LIDC-IDRI-0859",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0859.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0859.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0859.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0879",
+      "patient_id": "LIDC-IDRI-0879",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0879.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0879.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0879.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0906",
+      "patient_id": "LIDC-IDRI-0906",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0906.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0906.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0906.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0913",
+      "patient_id": "LIDC-IDRI-0913",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0913.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0913.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0913.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0921",
+      "patient_id": "LIDC-IDRI-0921",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0921.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0921.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0921.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0922",
+      "patient_id": "LIDC-IDRI-0922",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0922.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0922.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0922.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0943",
+      "patient_id": "LIDC-IDRI-0943",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0943.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0943.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0943.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0955",
+      "patient_id": "LIDC-IDRI-0955",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0955.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0955.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0955.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0986",
+      "patient_id": "LIDC-IDRI-0986",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-0986.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-0986.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-0986.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-1008",
+      "patient_id": "LIDC-IDRI-1008",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-1008.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-1008.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-1008.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-1012",
+      "patient_id": "LIDC-IDRI-1012",
+      "dataset": "LIDC_IDRI",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ct/LIDC-IDRI-1012.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/nodulemask/LIDC-IDRI-1012.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LIDC_IDRI/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LIDC_IDRI/ts_out/LIDC-IDRI-1012.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0011",
+      "patient_id": "LNDb-0011",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0011.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0011.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0011.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0044",
+      "patient_id": "LNDb-0044",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0044.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0044.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0044.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0068",
+      "patient_id": "LNDb-0068",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0068.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0068.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0068.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0073",
+      "patient_id": "LNDb-0073",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0073.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0073.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0073.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0079",
+      "patient_id": "LNDb-0079",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0079.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0079.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0079.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0103",
+      "patient_id": "LNDb-0103",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0103.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0103.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0103.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0113",
+      "patient_id": "LNDb-0113",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0113.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0113.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0113.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0115",
+      "patient_id": "LNDb-0115",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0115.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0115.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0115.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0116",
+      "patient_id": "LNDb-0116",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0116.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0116.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0116.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0119",
+      "patient_id": "LNDb-0119",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0119.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0119.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0119.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0123",
+      "patient_id": "LNDb-0123",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0123.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0123.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0123.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0127",
+      "patient_id": "LNDb-0127",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0127.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0127.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0127.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0140",
+      "patient_id": "LNDb-0140",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0140.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0140.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0140.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0158",
+      "patient_id": "LNDb-0158",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0158.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0158.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0158.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0213",
+      "patient_id": "LNDb-0213",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0213.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0213.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0213.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0252",
+      "patient_id": "LNDb-0252",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0252.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0252.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0252.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0267",
+      "patient_id": "LNDb-0267",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0267.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0267.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0267.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0272",
+      "patient_id": "LNDb-0272",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0272.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0272.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0272.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0280",
+      "patient_id": "LNDb-0280",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0280.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0280.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0280.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0292",
+      "patient_id": "LNDb-0292",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0292.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0292.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0292.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0297",
+      "patient_id": "LNDb-0297",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0297.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0297.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0297.nii.gz"
+    },
+    {
+      "case_id": "LNDb-0309",
+      "patient_id": "LNDb-0309",
+      "dataset": "LNDb",
+      "image": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ct/LNDb-0309.nii.gz",
+      "nod_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/nodulemask/LNDb-0309.nii.gz",
+      "annotation_dir": "/nas-ctm01/datasets/public/Lung_Nodule/train/LNDb/annotations",
+      "ts_mask": "/nas-ctm01/datasets/public/LungNodule-nifti/preprocessed/train/LNDb/ts_out/LNDb-0309.nii.gz"
+    }
+  ]
+}

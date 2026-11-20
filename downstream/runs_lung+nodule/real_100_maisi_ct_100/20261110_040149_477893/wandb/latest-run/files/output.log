@@ -1,0 +1,63 @@
+/nas-ctm01/homes/djmendes/.conda/envs/gen/lib/python3.11/site-packages/lightning/fabric/plugins/environments/slurm.py:204: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python train.py --experiment configs/experiments/real_100_m ...
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nas-ctm01/homes/djmendes/.conda/envs/gen/lib/python3.11/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py:242: Precision 16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name             ┃ Type              ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ network          │ SegResNet         │  4.7 M │ train │     0 │
+│ 1 │ dice_loss        │ DiceLoss          │      0 │ train │     0 │
+│ 2 │ entropy_loss     │ CrossEntropyLoss  │      0 │ train │     0 │
+│ 3 │ nodule_dice_loss │ DiceLoss          │      0 │ train │     0 │
+│ 4 │ nodule_bce_loss  │ BCEWithLogitsLoss │      0 │ train │     0 │
+└───┴──────────────────┴───────────────────┴────────┴───────┴───────┘
+Trainable params: 4.7 M
+Non-trainable params: 0
+Total params: 4.7 M
+Total estimated model params size (MB): 18.804
+Modules in train mode: 141
+Modules in eval mode: 0
+Total FLOPs: 0
+Epoch 81: 100%|██████████| 1864/1864 [16:17<00:00,  1.91it/s, v_num=nkkh, val_loss=0.300, val_loss_nodule=0.559, val_dice_lung=0.984, val_dice_nodule=0.452]
+                                                                          
+Metric val_loss_nodule improved. New best score: 1.011
+Metric val_loss_nodule improved by 0.009 >= min_delta = 0.001. New best score: 1.002
+Metric val_loss_nodule improved by 0.009 >= min_delta = 0.001. New best score: 0.993
+Metric val_loss_nodule improved by 0.030 >= min_delta = 0.001. New best score: 0.962
+Metric val_loss_nodule improved by 0.091 >= min_delta = 0.001. New best score: 0.871
+Metric val_loss_nodule improved by 0.135 >= min_delta = 0.001. New best score: 0.736
+Metric val_loss_nodule improved by 0.037 >= min_delta = 0.001. New best score: 0.699
+Metric val_loss_nodule improved by 0.062 >= min_delta = 0.001. New best score: 0.637
+Metric val_loss_nodule improved by 0.010 >= min_delta = 0.001. New best score: 0.627
+Metric val_loss_nodule improved by 0.016 >= min_delta = 0.001. New best score: 0.611
+Metric val_loss_nodule improved by 0.032 >= min_delta = 0.001. New best score: 0.579
+Metric val_loss_nodule improved by 0.013 >= min_delta = 0.001. New best score: 0.566
+Metric val_loss_nodule improved by 0.004 >= min_delta = 0.001. New best score: 0.562
+Metric val_loss_nodule improved by 0.004 >= min_delta = 0.001. New best score: 0.558
+Metric val_loss_nodule improved by 0.013 >= min_delta = 0.001. New best score: 0.545
+Metric val_loss_nodule improved by 0.006 >= min_delta = 0.001. New best score: 0.539
+Metric val_loss_nodule improved by 0.011 >= min_delta = 0.001. New best score: 0.529
+Monitored metric val_loss_nodule did not improve in the last 20 records. Best score: 0.529. Signaling Trainer to stop.
+Run directory: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100_maisi_ct_100/20261110_040149_477893
+Best checkpoint: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100_maisi_ct_100/20261110_040149_477893/checkpoints/epoch=061-nodule_dice=0.4847.ckpt
+Best checkpoint monitor value: metatensor(0.4847, device='cuda:0')
+
+Generating report from best checkpoint: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100_maisi_ct_100/20261110_040149_477893/checkpoints/epoch=061-nodule_dice=0.4847.ckpt
+Report: validation cases 10/104
+Report: validation cases 20/104
+Report: validation cases 30/104
+Report: validation cases 40/104
+Report: validation cases 50/104
+Report: validation cases 60/104
+Report: validation cases 70/104
+Report: validation cases 80/104
+Report: validation cases 90/104
+Report: validation cases 100/104
+Report: validation cases 104/104
+Report saved: /nas-ctm01/homes/djmendes/LungGiants/downstream/runs_lung+nodule/real_100_maisi_ct_100/20261110_040149_477893/report/report.png
+background (104 eligible cases): {'dice': 0.997770570418068, 'precision': 0.9976368822498399, 'recall': 0.9979055957275574}
+lung (104 eligible cases): {'dice': 0.9844094607511091, 'precision': 0.9856528369980213, 'recall': 0.9832493728205377}
+nodule (98 eligible cases): {'dice': 0.48375328654411576, 'precision': 0.5583787217916651, 'recall': 0.49989778885926844}
